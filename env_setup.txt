@@ -1,4 +1,8 @@
-This document instruct how to setup blockchain development environment on Raspberry Pi
+========= Blockchain development environment setup on Linux =================
+
+---------------------------------------------------------------------------
+							Prerequisite
+---------------------------------------------------------------------------
 
 A) Install Docker Engine And Docker Compose
 	1) Install Docker:
@@ -10,11 +14,14 @@ A) Install Docker Engine And Docker Compose
 			
 
 B) Install Go language:
-	#sudo apt-get install golang
+	#Not suggest use: `sudo apt-get install golang` to install golang
+	#Download go package and extract to /usr/local
 	wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
 	sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
-	sudo echo ‘export PATH=$PATH:/usr/local/go/bin’ >> ~/.bashrc
-	#sudo echo ‘export GOPATH=$HOME/go’ >> ~/.bashrc
+	
+	# Add GOROOT and append to PATH
+	sudo echo ‘export GOROOT=/usr/local/go’ >> ~/.bashrc
+	sudo echo ‘export PATH=$PATH:$GOROOT/bin’ >> ~/.bashrc	
 	
 
 C) Reboot & Test
@@ -23,3 +30,32 @@ C) Reboot & Test
 	docker-compose -v
 	pip -V
 	git --version
+	
+
+---------------------------------------------------------------------------
+							Ethereum Blockchain
+---------------------------------------------------------------------------
+The following instruction introduce How to install an Ethereum blockchain 
+node in the Raspberry Pi 3 with the Raspbian Stretch OS.
+Method 1): Install pre-compiled Geth
+    First of all, download the geth client and extract it to /usr/local/geth.
+		tar -C /usr/local/geth -xzf geth-linux-arm7-1.6.7-ab5646c5.tar.gz
+		export PATH=$PATH:/usr/local/geth to the /etc/profile 
+	
+Method 1): Build from source code
+	As a firstt thing we start by updating our software
+		sudo apt-get update
+	1) download from official ethereum repository the Geth client
+		git clone https://github.com/ethereum/go-ethereum.git
+	2) Ether go-ethereum
+		cd go-ethereum
+	3) build geth
+		make geth
+	This will take several minutes to be done.
+	4) Add go-ethereum executable bin path in ~/.bashrc
+		export GOETHEREUM=~/Desktop/Github/Blockchain_dev/dev_sdk/ethereum/go-ethereum/build
+		export PATH=$PATH:$GOETHEREUM/bin
+	5) Check version 
+		geth version
+	
+
