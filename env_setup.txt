@@ -1,0 +1,25 @@
+This document instruct how to setup blockchain development environment on Raspberry Pi
+
+A) Install Docker Engine And Docker Compose
+	1) Install Docker:
+			curl -sSL https://get.docker.com | sh
+	2) Adding your user to the "docker" group with something like:
+			sudo usermod -aG docker pi
+	3) Install docker compose:
+	        sudo pip install docker-compose
+			
+
+B) Install Go language:
+	#sudo apt-get install golang
+	wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
+	sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
+	sudo echo ‘export PATH=$PATH:/usr/local/go/bin’ >> ~/.bashrc
+	#sudo echo ‘export GOPATH=$HOME/go’ >> ~/.bashrc
+	
+
+C) Reboot & Test
+	go version
+	docker -v
+	docker-compose -v
+	pip -V
+	git --version
