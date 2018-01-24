@@ -1,7 +1,7 @@
 ========= Blockchain development environment setup on Linux =================
 
 ---------------------------------------------------------------------------
-							Prerequisite
+                        Prerequisite
 ---------------------------------------------------------------------------
 
 A) Install Docker Engine And Docker Compose
@@ -33,7 +33,7 @@ C) Reboot & Test
 	
 
 ---------------------------------------------------------------------------
-							Ethereum Blockchain
+                       Ethereum Blockchain
 ---------------------------------------------------------------------------
 The following instruction introduce How to install an Ethereum blockchain 
 node in the Raspberry Pi 3 with the Raspbian Stretch OS.
