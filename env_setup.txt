@@ -1,9 +1,9 @@
-========= Blockchain development environment setup on Linux =================
+================ Blockchain development environment setup on Linux =======================
 
----------------------------------------------------------------------------
-                        Prerequisite
----------------------------------------------------------------------------
-
+------------------------------------------------------------------------------------------
+                                 Prerequisite
+------------------------------------------------------------------------------------------
+#docker installation, refer to https://docs.docker.com/install/
 A) Install Docker Engine And Docker Compose
 	1) Install Docker:
 			curl -sSL https://get.docker.com | sh
@@ -15,9 +15,15 @@ A) Install Docker Engine And Docker Compose
 
 B) Install Go language:
 	#Not suggest use: `sudo apt-get install golang` to install golang
-	#Download go package and extract to /usr/local
+	#All golang package can be found on https://golang.org/dl/
+	# First of all, download go package and extract to /usr/local
+	#For Raspberry pi:
 	wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
 	sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
+	
+	#For Ubuntu
+	wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz
+	sudo tar -C /usr/local -xzf go1.9.3.linux-amd64.tar.gz
 	
 	# Add GOROOT and append to PATH
 	sudo echo ‘export GOROOT=/usr/local/go’ >> ~/.bashrc
@@ -32,17 +38,19 @@ C) Reboot & Test
 	git --version
 	
 
----------------------------------------------------------------------------
-                       Ethereum Blockchain
----------------------------------------------------------------------------
-The following instruction introduce How to install an Ethereum blockchain 
-node in the Raspberry Pi 3 with the Raspbian Stretch OS.
+---------------------------------------------------------------------------------------------
+								Ethereum Blockchain
+---------------------------------------------------------------------------------------------
+The following instruction introduce How to install an Ethereum blockchain node on Linux OS, 
+like Raspberry Pi 3 and Ununtu.
 Method 1): Install pre-compiled Geth
     First of all, download the geth client and extract it to /usr/local/geth.
-		tar -C /usr/local/geth -xzf geth-linux-arm7-1.6.7-ab5646c5.tar.gz
+		tar -C /usr/local/geth -xzf @package
+		#replace @package with package name, like: geth-linux-arm7-1.6.7-ab5646c5.tar.gz
+		
 		export PATH=$PATH:/usr/local/geth to the /etc/profile 
 	
-Method 1): Build from source code
+Method 2): Build from source code
 	As a firstt thing we start by updating our software
 		sudo apt-get update
 	1) download from official ethereum repository the Geth client
@@ -57,5 +65,4 @@ Method 1): Build from source code
 		export PATH=$PATH:$GOETHEREUM/bin
 	5) Check version 
 		geth version
-	
 
