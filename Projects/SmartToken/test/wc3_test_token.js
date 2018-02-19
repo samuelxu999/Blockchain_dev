@@ -12,8 +12,14 @@ web3.setProvider(new web3.providers.HttpProvider('http://localhost:8042'))
 // The contract that we are going to interact with
 var contractAddress = '0x1987802daa5798cfb5e881c109c4d448b6e4125b'
 
+// Load config data from SmartToken.json
+var config = require('../build/contracts/SmartToken.json');
+
+// Read ABI
+var ABI = config.abi;
+
 // Define the ABI (Application Binary Interface)
-var ABI = JSON.parse('[ { "constant": false, "inputs": [ { "name": "recipient", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "depositToken", "outputs": [ { "name": "success", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "recipient", "type": "address" } ], "name": "getTokens", "outputs": [ { "name": "value", "type": "uint256", "value": "60" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "recipient", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "withdrawToken", "outputs": [ { "name": "success", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "_from", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" } ], "name": "OnValueChanged", "type": "event" } ]')
+//var ABI = JSON.parse('[ { "constant": false, "inputs": [ { "name": "recipient", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "depositToken", "outputs": [ { "name": "success", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "recipient", "type": "address" } ], "name": "getTokens", "outputs": [ { "name": "value", "type": "uint256", "value": "60" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "recipient", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "withdrawToken", "outputs": [ { "name": "success", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "_from", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" } ], "name": "OnValueChanged", "type": "event" } ]')
 
 // contract object
 var contract = web3.eth.contract(ABI).at(contractAddress)
