@@ -66,3 +66,46 @@ Method 2): Build from source code
 	5) Check version 
 		geth version
 
+---------------------------------------------------------------------------------------------
+								Smart Contract Development
+reference:http://chainskills.com/2017/04/10/raspberry-pi-and-ethereum-the-epilogue/
+---------------------------------------------------------------------------------------------
+1) Prerequisite: make sure your Pi has node installed, if not, try install npm and node.js first.
+	Install node.js by executing:
+		pi$ curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+		pi$ sudo apt-get install nodejs
+	
+	Test installation:
+		pi$ node -v
+		v7.4.0
+
+		pi$ npm -v
+		4.0.5
+		
+2) We use truffle as development IDE, http://truffleframework.com/docs/
+	Install truffle on RPI:
+		pi$ sudo npm install -g truffle
+	
+	Test installation:
+		pi$ truffle version
+		Truffle v4.0.6 (core: 4.0.6)
+		Solidity v0.4.19 (solc-js)
+		
+3) Prepare the project folder.
+	1) New project folder:SmartToken
+		pi$ mkdir -p ~/Projects/SmartToken
+		
+	2) Then, use Truffle to initiate your project: 
+		pi$ cd ~/Projects/SmartToken
+		pi$ truffle init
+		
+	3) Install Web3 module:
+		pi$ cd ~/Projects/SmartToken
+		pi$ npm install web3@0.20.1
+	
+	4) Develop smart contract
+		refer to http://chainskills.com/2017/04/03/create-and-deploy-a-smart-contract-66/
+		
+	5) In general, test scripts are saved in ./test folder, you could execute test script like:
+		pi$ node ./test/wc3_test_token.js
+			
