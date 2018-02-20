@@ -24,21 +24,37 @@ var ABI = config.abi;
 // contract object
 var contract = web3.eth.contract(ABI).at(contractAddress)
 
+//-------------------------- test demo -------------------------------
+var test_node = "node1_1";
+
 //list value in all account
-list_all();
+//list_all();
+get_token(test_node);
+
+//deposit_test(getAddress(test_node), 3)
+withdraw_test(getAddress(test_node), 2);
 
 // display initial state
-showStatus()
+//showStatus()
 
+//get_token('miner1_1');
+var address=getAddress(test_node);
+account_onValueChanged(address);
+
+
+//====================================== function for test ==================================
 // wait for an event triggered on the Smart Contract
-var onValueChanged = contract.OnValueChanged({_from: web3.eth.coinbase});
+function account_onValueChanged(address) {
+	var onValueChanged = contract.OnValueChanged({_from: address});
 
-onValueChanged.watch(function(error, result) {
- if (!error) {
- showStatus()
- }
-})
-
+	onValueChanged.watch(function(error, result) {
+		if (!error) {
+			//showStatus()
+			var token = contract.getTokens(address);
+			console.log(token);
+		}
+	})
+}
 
 // display value of the token in coinbase account
 function showStatus() {
@@ -55,11 +71,39 @@ function showStatus() {
 function list_all() {
 	/*var add1='0xaa09c6d65908e54bf695748812c51d8f2ceea0f5';
 	var add2='0x950d8eb4825c597534027638c862496ea0d7cf43';*/
-
-	var token1 = contract.getTokens(web3.eth.accounts[0])
-	var token2 = contract.getTokens(web3.eth.accounts[1])
-
-	// display the value of the token according to account
-	console.log(token1);
-	console.log(token2);
+	
+	for (i = 0; i < web3.eth.accounts.length; i++) { 
+		// get token value 
+		var token = contract.getTokens(web3.eth.accounts[i])
+		// display the value of the token according to account
+		console.log(token);
+	}
 }
+
+function get_token(node_name) {
+	var address=getAddress(node_name)
+	var token = contract.getTokens(address)
+	console.log(token);
+}
+
+// launch depositToken transaction
+function deposit_test(recipient, value) {
+	var ret=contract.depositToken(recipient, value, {from: web3.eth.coinbase})
+	// display the tracsaction result
+	console.log(ret);
+}
+
+// launch withdrawToken transaction
+function withdraw_test(recipient, value) {
+	var ret=contract.withdrawToken(recipient, value, {from: web3.eth.coinbase})
+	// display the tracsaction result
+	console.log(ret);
+}
+
+//get address from json file
+function getAddress(node_name){
+	// Load config data from SmartToken.json
+	var addrlist = require('./addr_list.json');	
+	return addrlist[node_name];	
+}
+
