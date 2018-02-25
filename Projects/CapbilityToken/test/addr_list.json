@@ -1,0 +1,20 @@
+{
+	"lenovo_miner1_0": "0x3d40fad73c91aed74ffbc1f09f4cde7cce533671",
+	"lenovo_miner1_1": "0x62c7db36889cf94288f8bc567f3d32a4aa8f90a0",
+	"lenovo_miner2_0": "0x13b126c92d0fc254c4a8bf414b60953d3fdcd9cb",
+	"lenovo_miner2_1": "0x2315f8459dad537954e1b61064f3fc870b6bcf14",
+	"sam_miner_win7_0": "0x6bf852ca042667d7676248a5d1429142137d12d4",
+	"sam_miner_win7_1": "0x3326e68134ef66065be61c5b8067f2e4e9742038",
+	"sam_miner_ubuntu_0": "0x7711493c45048648ab7027f0d6737bf9e352e180",
+	"sam_miner_ubuntu_1": "0x032335541ea1a6cbdf353975b916e5a3ce3c43c2",
+	"lab1_miner_0": "0xaf81309bc2a3bdbfca8576120e96fb34d8cd12e7",
+	"lab1_miner_1": "0x19e089997fd3c9424bc80718fed214dd7f66bbac",
+	"lab2_miner_0": "0xa8bbb9f68da15e09e9d09100d38031a46d0581cd",
+	"lab2_miner_1": "0xbe9a16f9bdbeec0e4342ee4c9f72d7bdedd8c3a6",
+	"lab3_miner_0": "0xf30db537acb08b46084af8ca8083befe524aaf30",
+	"lab3_miner_1": "0x9e990943fa98e3998b43581de45d3434975a27be",
+	"RPi1_node_0": "0xaa09c6d65908e54bf695748812c51d8f2ceea0f5",
+	"RPi1_node_1": "0x950d8eb4825c597534027638c862496ea0d7cf43",
+	"RPi2_node_0": "0xfa4c5d320d638cbdff557c4c1f3110d3143f40c3",
+	"RPi2_node_1": "0x0c5feadbb942527aca89f226859911ee4fe228ea"
+}
