@@ -11,7 +11,7 @@ Created on Mar.8, 2018
 '''
 
 from web3 import Web3, HTTPProvider, IPCProvider
-from utilities import DatetimeUtil
+from utilities import DatetimeUtil, TypesUtil
 import json, datetime, time
 
 class CapACToken(object):
@@ -104,7 +104,7 @@ class CapACToken(object):
 				#print(token_data[i])
 			else:
 				print(token_data[i])
-	
+
 	# get address from json file
 	@staticmethod
 	def getAddress(node_name, datafile):
@@ -117,7 +117,7 @@ if __name__ == "__main__":
 	contract_config = '../CapbilityToken/build/contracts/CapACToken.json'
 
 	#Get account address
-	accountAddr=CapACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
+	accountAddr=CapACToken.getAddress('RPi1_node_0', '../CapbilityToken/test/addr_list.json')
 	print("Account: " + accountAddr)
 	#new CapACToken object
 	mytoken=CapACToken(http_provider, contract_addr, contract_config)
@@ -134,6 +134,12 @@ if __name__ == "__main__":
 	#Read token data using call
 	token_data=mytoken.getCapToken(accountAddr);
 	CapACToken.print_tokendata(token_data)
+	
+	# list Access control
+	json_data=TypesUtil.string_to_json(token_data[-1])
+	print(json_data['resource'])
+	print(json_data['action'])
+	print(json_data['conditions'])
 
 	#Send transact
 	#mytoken.initCapToken(accountAddr);
@@ -144,10 +150,10 @@ if __name__ == "__main__":
 	#calculate issue_time and expire_time
 	issue_time = DatetimeUtil.datetime_timestamp(nowtime)
 	duration = DatetimeUtil.datetime_duration(0, 1, 0, 0)
-	expire_time = DatetimeUtil.datetime_timestamp(nowtime+duration)
+	expire_time = DatetimeUtil.datetime_timestamp(nowtime + duration)
 	#mytoken.setCapToken_expireddate(accountAddr, issue_time, expire_time)
 
-	access_right='{"resource":"/test/api/v1.0/dt, "action":"GET"}';
+	access_right='{"resource":"/test/api/v1.0/dt", "action":"GET", "conditions":{"value": {"start": "8:12:32", "end": "14:32:32"},"type": "Timespan"}}';
 	#mytoken.setCapToken_authorization(accountAddr, access_right)
 
 	pass
