@@ -33,7 +33,7 @@ contract CapACToken {
 																	uint256, 
 																	string) {
 		// querying token from authorized address is allowed: supervisor or delegatee
-        if( (recipient == msg.sender) || (supervisor == msg.sender) ) {
+        //if( (recipient == msg.sender) || (supervisor == msg.sender) ) {
 		    //var token_str='';
 			/*if(captokens[recipient].initialized == false) {
 				//tokenToString(recipient);
@@ -48,7 +48,7 @@ contract CapACToken {
 					captokens[recipient].expireddate,
 					captokens[recipient].authorization
 					);
-		}
+		/*}
 		// otherwise, return empty data
 		else {
 			return(	0, 
@@ -59,7 +59,7 @@ contract CapACToken {
 					0,
 					"Empty"
 					);
-		}
+		}*/
 
 	}
 

@@ -113,11 +113,11 @@ class CapACToken(object):
 
 if __name__ == "__main__":
 	http_provider = 'http://localhost:8042'
-	contract_addr = '0x9ccaa35b84570597fce4db8b157ae5cebfb4d0e5'
+	contract_addr = '0x22ff0e567def69c29e30e1243f7135b711750de9'
 	contract_config = '../CapbilityToken/build/contracts/CapACToken.json'
 
 	#Get account address
-	accountAddr=CapACToken.getAddress('RPi1_node_0', '../CapbilityToken/test/addr_list.json')
+	accountAddr=CapACToken.getAddress('TKB1_node_0', '../CapbilityToken/test/addr_list.json')
 	print("Account: " + accountAddr)
 	#new CapACToken object
 	mytoken=CapACToken(http_provider, contract_addr, contract_config)
@@ -136,10 +136,10 @@ if __name__ == "__main__":
 	CapACToken.print_tokendata(token_data)
 	
 	# list Access control
-	json_data=TypesUtil.string_to_json(token_data[-1])
+	'''json_data=TypesUtil.string_to_json(token_data[-1])
 	print(json_data['resource'])
 	print(json_data['action'])
-	print(json_data['conditions'])
+	print(json_data['conditions'])'''
 
 	#Send transact
 	#mytoken.initCapToken(accountAddr);
