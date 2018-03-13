@@ -11,7 +11,7 @@ var web3 = new Web3();
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8042'));
 
 // The contract address that we are going to interact with
-var contractAddress = '0x9ccaa35b84570597fce4db8b157ae5cebfb4d0e5';
+var contractAddress = '0x23cd84b2dfc81a5feb312d1a7217d6537b90d2f8';
 
 // Load node addresses data from SmartToken.json
 var config = require('../build/contracts/CapACToken.json');
@@ -48,9 +48,15 @@ function account_onValueChanged(address) {
 	//open watching.
 	onValueChanged.watch(function(error, result) {
 		if (!error) {
-			//showStatus()
-			var token = contract.getCapToken(address);
-			console.log(token);
+			// get token status
+			var tokenStatus = contract.getCapTokenStatus(address);
+			console.log(tokenStatus);
+			// get delegate status
+			var deelgateStatus = contract.getDelegateStatus(address);
+			console.log(deelgateStatus);
+			// get authorization data
+			var authorization = contract.getAuthorization(address);
+			console.log(authorization);
 
 			//stop watching
 			onValueChanged.stopWatching();
@@ -60,44 +66,57 @@ function account_onValueChanged(address) {
 
 function get_token(node_name) {
 	var address=getAddress(node_name);
-	var token = contract.getCapToken(address);
 
-	for (var i = 0; i <token.length; i++) {
-		if(i!=4 && i!=5) {
-			console.log(token[i]);
+	// get token status
+	var tokenStatus = contract.getCapTokenStatus(address);
+
+	for (var i = 0; i <tokenStatus.length; i++) {
+		if(i!=3 && i!=4) {
+			console.log(tokenStatus[i]);
 		}
 		else {
-			//console.log(token[i].c[0]);
-			expdate = myUtility.Datetime.IntToDate(token[i].c[0]);
+			//console.log(tokenStatus[i].c[0]);
+			expdate = myUtility.Datetime.IntToDate(tokenStatus[i].c[0]);
 			console.log(myUtility.Datetime.FormatString(expdate));
 		}
 	}
 
-	//print out token data
-	//console.log(token.s);
-	//console.log(token.e);
-	//console.log(token["c"][0]);
+	// get delegate status
+	var deelgateStatus = contract.getDelegateStatus(address);
+	//console.log(deelgateStatus[0]["c"][0]);
+	console.log(deelgateStatus[1]);
+	console.log(deelgateStatus[2]["c"][0]);
+
+	// get authorization data
+	var authorization = contract.getAuthorization(address);
+	console.log(authorization[1]);
 }
 
 // launch depositToken transaction
 function setToken_test(recipient) {
+	var ret = 0;
 	// initialize token
-	//var ret=contract.initCapToken( recipient, {from: web3.eth.coinbase} );
+	//ret=contract.initCapToken( recipient, {from: web3.eth.coinbase} );
 
 	// change isValid flag in token
-	//var ret=contract.setCapToken_isValid(recipient, true, {from: web3.eth.coinbase});
+	//ret=contract.setCapToken_isValid(recipient, true, {from: web3.eth.coinbase});
 
 	// set issue date and expired date
-	/*var nowtime = new Date();
+	var nowtime = new Date();
 	var issue_time = myUtility.Datetime.DateToInt(nowtime);
 	var expire_time = myUtility.Datetime.DateToInt(myUtility.Datetime.DateAdd(nowtime, 1, EumDateType.Months))
-	var ret=contract.setCapToken_expireddate(recipient, issue_time, expire_time, {from: web3.eth.coinbase});*/
+	//ret=contract.setCapToken_expireddate(recipient, issue_time, expire_time, {from: web3.eth.coinbase});
 
 	// set access right
 	var access_right='{"resource":"/test/api/v1.0/dt, "action":"GET"}';
-	//var access_right='{xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}';
-	var ret=contract.setCapToken_authorization(recipient, access_right, {from: web3.eth.coinbase});
+	//var access_right='{}';
+	//ret=contract.setCapToken_authorization(recipient, access_right, {from: web3.eth.coinbase});
 
+	// set delegation right
+	//ret=contract.setCapToken_delegateDepth(recipient, 3, {from: web3.eth.coinbase});
+	//ret=contract.setCapToken_delegatee(recipient, "0x6bf852ca042667d7676248a5d1429142137d12d4", {from: web3.eth.coinbase});
+	//ret=contract.setCapToken_revokeDelegate(recipient, "0x6bf852ca042667d7676248a5d1429142137d12d4", {from: web3.eth.coinbase});
+	
 	// display the tracsaction result
 	console.log(ret);
 }
