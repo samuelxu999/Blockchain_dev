@@ -50,13 +50,25 @@ class CapACToken(object):
 	#get token data by call getCapToken()
 	def getCapToken(self, account_addr):
 		#Change account address to EIP checksum format
-		checksumAddr=Web3.toChecksumAddress(account_addr)
+		checksumAddr = Web3.toChecksumAddress(account_addr)
 
+		token_data = []
 		'''
 		Call a contract function, executing the transaction locally using the eth_call API. 
 		This will not create a new public transaction.
 		'''
-		token_data=self.contract.call({'from': self.web3.eth.coinbase}).getCapToken(checksumAddr)
+
+		# get token status
+		tokenStatus=self.contract.call({'from': self.web3.eth.coinbase}).getCapTokenStatus(checksumAddr)
+		token_data.append(tokenStatus)
+
+		# get delegate status
+		deelgateStatus = self.contract.call({'from': self.web3.eth.coinbase}).getDelegateStatus(checksumAddr)
+		token_data.append(deelgateStatus)
+
+		# get authorization data
+		authorization = self.contract.call({'from': self.web3.eth.coinbase}).getAuthorization(checksumAddr)
+		token_data.append(authorization)
 		return token_data
 
 	#initialized token by sending transact to call initCapToken()
@@ -73,7 +85,7 @@ class CapACToken(object):
 		checksumAddr=Web3.toChecksumAddress(recipient)	
 
 		# Execute the specified function by sending a new public transaction.	
-		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_isValid(checksumAddr, flag_value);
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_isValid(checksumAddr, flag_value)
 
 	# set issue date and expired date
 	def setCapToken_expireddate(self, recipient, issue_time, expire_time):
@@ -83,27 +95,61 @@ class CapACToken(object):
 		# Execute the specified function by sending a new public transaction.	
 		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_expireddate(checksumAddr, issue_time, expire_time)
 
+	# set delegation depth
+	def setCapToken_delegateDepth(self, recipient, depth):
+		#Change account address to EIP checksum format
+		checksumAddr=Web3.toChecksumAddress(recipient)	
+
+		# Execute the specified function by sending a new public transaction.	
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_delegateDepth(checksumAddr, depth)
+
+	# set delegatee
+	def setCapToken_delegatee(self, recipient, delegatee):
+		#Change account address to EIP checksum format
+		checksumAddr = Web3.toChecksumAddress(recipient)	
+		checksum_delegatee = Web3.toChecksumAddress(delegatee)
+
+		# Execute the specified function by sending a new public transaction.	
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_delegatee(checksumAddr, checksum_delegatee)
+
+	# revoke delegatee
+	def setCapToken_revokeDelegate(self, recipient, delegatee):
+		#Change account address to EIP checksum format
+		checksumAddr = Web3.toChecksumAddress(recipient)	
+		checksum_delegatee = Web3.toChecksumAddress(delegatee)
+
+		# Execute the specified function by sending a new public transaction.	
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_revokeDelegate(checksumAddr, checksum_delegatee)
+
 	# set issue date and expired date
 	def setCapToken_authorization(self, recipient, access_right):
 		#Change account address to EIP checksum format
 		checksumAddr=Web3.toChecksumAddress(recipient)	
 
 		# Execute the specified function by sending a new public transaction.	
-		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_authorization(checksumAddr, access_right);
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setCapToken_authorization(checksumAddr, access_right)
 
 	# Print token date
 	@staticmethod
 	def print_tokendata(token_data):
-		#print(token_data)
-		for i in range(0,len(token_data)):
-			if(i==4 or i==5):
-				dt=DatetimeUtil.timestamp_datetime(token_data[i])
+		#print token status
+		for i in range(0,len(token_data[0])):
+			if(i==3 or i==4):
+				dt=DatetimeUtil.timestamp_datetime(token_data[0][i])
 				#dt=datetime.datetime.utcfromtimestamp(token_data[i]/1e3)
 				print(DatetimeUtil.datetime_string(dt))
 				#print(DatetimeUtil.datetime_timestamp(dt))
 				#print(token_data[i])
 			else:
-				print(token_data[i])
+				print(token_data[0][i])
+
+		#print delegation status
+		for i in range(0,len(token_data[1])):
+			print(token_data[1][i])
+
+
+		#print authprization status
+		print(token_data[2])
 
 	# get address from json file
 	@staticmethod
@@ -113,11 +159,11 @@ class CapACToken(object):
 
 if __name__ == "__main__":
 	http_provider = 'http://localhost:8042'
-	contract_addr = '0x22ff0e567def69c29e30e1243f7135b711750de9'
+	contract_addr = '0x23cd84b2dfc81a5feb312d1a7217d6537b90d2f8'
 	contract_config = '../CapbilityToken/build/contracts/CapACToken.json'
 
 	#Get account address
-	accountAddr=CapACToken.getAddress('TKB1_node_0', '../CapbilityToken/test/addr_list.json')
+	accountAddr=CapACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
 	print("Account: " + accountAddr)
 	#new CapACToken object
 	mytoken=CapACToken(http_provider, contract_addr, contract_config)
@@ -136,7 +182,7 @@ if __name__ == "__main__":
 	CapACToken.print_tokendata(token_data)
 	
 	# list Access control
-	'''json_data=TypesUtil.string_to_json(token_data[-1])
+	'''json_data=TypesUtil.string_to_json(token_data[-1][1])
 	print(json_data['resource'])
 	print(json_data['action'])
 	print(json_data['conditions'])'''
@@ -153,6 +199,12 @@ if __name__ == "__main__":
 	expire_time = DatetimeUtil.datetime_timestamp(nowtime + duration)
 	#mytoken.setCapToken_expireddate(accountAddr, issue_time, expire_time)
 
+	#set delegation right
+	#mytoken.setCapToken_delegateDepth(accountAddr, 3)
+	#mytoken.setCapToken_delegatee(accountAddr, '0x9c2da23272c8fec791c54febd0507fb519730cee')
+	#mytoken.setCapToken_revokeDelegate(accountAddr, '0x9c2da23272c8fec791c54febd0507fb519730cee')
+
+	#set access right
 	access_right='{"resource":"/test/api/v1.0/dt", "action":"GET", "conditions":{"value": {"start": "8:12:32", "end": "14:32:32"},"type": "Timespan"}}';
 	#mytoken.setCapToken_authorization(accountAddr, access_right)
 
