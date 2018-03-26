@@ -16,6 +16,7 @@ import json
 import sys
 from RBAC_Token import RBACToken
 from utilities import DatetimeUtil, TypesUtil, FileUtil
+from db_layer import UsersManager, RolesManager, AccessManager
 from flask import request
 
 now = datetime.datetime.now()
@@ -26,6 +27,7 @@ timestr=now.strftime("%H:%M:%S")
 http_provider = 'http://localhost:8042'
 contract_addr = '0x3fa4a39c4657acc936ac1c598ff24c6e9a34b1a9'
 contract_config = '../CapbilityToken/build/contracts/RBACToken.json'
+path_db='RBAC.db'
 
 #new CapACToken object
 mytoken=RBACToken(http_provider, contract_addr, contract_config)
@@ -77,19 +79,25 @@ class RBACPolicy(object):
 	# verify acccess right
 	@staticmethod
 	def is_access_valid(token_data, acess_args=''):
-		ret = True
+		ret = False
+
+		#query access right associated to role from local database
+		user_access=RolesManager.select_ByName(path_db, token_data['role'])
+		#print(user_access)
 
 		#token_authorization = token_data[2][1]
-		ac_data=TypesUtil.string_to_json(token_data['authorization'])
-		#print(ac_data)
+		json_data=TypesUtil.string_to_jsonlist(user_access[0]['AccessRight'])
+		#print(json_data)
 
-		if(ac_data['action']!=acess_args['method'] or 
-			ac_data['resource']!=str(acess_args['url_rule']) or 
-			not CapPolicy.is_condition_valid(ac_data['conditions'])):
-			'''print(ac_data['action']!=acess_args['method'])
-			print(ac_data['resource']==str(acess_args['url_rule']))
-			print(CapPolicy.is_condition_valid(ac_data['conditions']))'''
-			ret = False
+		for ac_data in json_data:
+			if(ac_data['action']==acess_args['method'] and
+				ac_data['resource']==str(acess_args['url_rule']) and 
+				RBACPolicy.is_condition_valid(ac_data['conditions'])):
+				'''print(ac_data['action']==acess_args['method'])
+				print(ac_data['resource']==str(acess_args['url_rule']))
+				print(RBACPolicy.is_condition_valid(ac_data['conditions']))'''
+				ret = True
+				break
 		return ret
 
 	# check condition status to verify context requirement
@@ -118,7 +126,7 @@ class RBACPolicy(object):
 	@staticmethod	
 	def is_valid_access_request(req_args):
 		#Get account address
-		accountAddr=CapACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
+		accountAddr=RBACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
 
 		#Define ls_time_exec to save executing time to log
 		ls_time_exec=[]
@@ -127,13 +135,13 @@ class RBACPolicy(object):
 		start_time=time.time()
 
 		# 1) get token from smart contract, high overload
-		token_data=CapPolicy.get_token(accountAddr)
+		token_data=RBACPolicy.get_token(accountAddr)
 
 		# 2) Save token data to local token.dat
-		#FileUtil.AddLine('token.dat', TypesUtil.json_to_string(token_data))
+		#FileUtil.AddLine('RBAC_token.dat', TypesUtil.json_to_string(token_data))
 
 		# 3) read token from local data, low overload
-		'''read_token=FileUtil.ReadLines('token.dat')
+		'''read_token=FileUtil.ReadLines('RBAC_token.dat')
 		token_data=TypesUtil.string_to_json(read_token[0])'''
 		#print(token_data)
 
@@ -148,7 +156,7 @@ class RBACPolicy(object):
 		#print(access_data)
 
 		start_time=time.time()
-		if(not CapPolicy.is_token_valid(token_data)):
+		if(not RBACPolicy.is_token_valid(token_data)):
 			print('token valid fail')
 			return False
 		exec_time=time.time()-start_time
@@ -156,7 +164,7 @@ class RBACPolicy(object):
 		print("Execution time of is_token_valid is:%2.6f" %(exec_time))
 
 		start_time=time.time()
-		if(not CapPolicy.is_access_valid(token_data, access_data)):
+		if(not RBACPolicy.is_access_valid(token_data, access_data)):
 			print('access valid fail')
 			return False
 		exec_time=time.time()-start_time
@@ -174,16 +182,16 @@ def test_CapACToken():
 
 
 	#Get account address
-	accountAddr=CapACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
+	accountAddr=RBACToken.getAddress('sam_miner_win7_0', '../CapbilityToken/test/addr_list.json')
 	#print("Account: " + accountAddr)
 
 	#Read token data using call
-	#token_data=mytoken.getCapToken(accountAddr);
-	#CapACToken.print_tokendata(token_data)
+	token_data=mytoken.getRoleToken(accountAddr);
+	RBACToken.print_tokendata(token_data)
 	#print(token_data)
 
 
-	#token_data=CapPolicy.get_token(accountAddr)
+	token_data=RBACPolicy.get_token(accountAddr)
 	'''print(token_data['delegatee'][0])
 	ac = TypesUtil.string_to_json(token_data['authorization'])
 	print(ac['resource'])'''
@@ -194,9 +202,10 @@ def test_CapACToken():
 	json_token=TypesUtil.string_to_json(read_token[0])
 	print(json_token['initialized'])'''
 
-	#ret=CapPolicy.is_token_valid(token_data)
+	#ret=RBACPolicy.is_token_valid(token_data)
 
-	#ret=CapPolicy.is_valid_access_request()
+	ret=RBACPolicy.is_access_valid(token_data)
+	print(ret)
 	
 
 if __name__ == "__main__":
