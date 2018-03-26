@@ -205,3 +205,18 @@ class TypesUtil(object):
 	def json_to_string(json_data):
 		json_str = json.dumps(json_data)
 		return json_str
+
+	#json list to string
+	@staticmethod
+	def jsonlist_to_string(json_list):
+		list_str="|".join(TypesUtil.json_to_string(e) for e in json_list)
+		return list_str
+
+	#string to json list
+	@staticmethod
+	def string_to_jsonlist(str_data):
+		list_data=str_data.split('|')
+		json_list=[]
+		for data in list_data: 
+			json_list.append(TypesUtil.string_to_json(data))
+		return json_list
