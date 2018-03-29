@@ -16,6 +16,7 @@ from flask import Flask, jsonify
 from flask import abort,make_response,request
 from BlendCapAC_Policy import CapPolicy
 from RBAC_Policy import RBACPolicy
+from ABAC_Policy import ABACPolicy
 
 app = Flask(__name__)
 
@@ -76,7 +77,8 @@ def get_projects():
 		
 	#Authorization process
 	#if(not CapPolicy.is_valid_access_request(request)):
-	if(not RBACPolicy.is_valid_access_request(request)):
+	#if(not RBACPolicy.is_valid_access_request(request)):
+	if(not ABACPolicy.is_valid_access_request(request)):
 		abort(401, {'message': 'Authorization fail, deny access'})
 	return jsonify({'result': 'Succeed', 'projects': projects}), 201
 	
@@ -89,7 +91,8 @@ def get_project():
 		
 	#Authorization process
 	#if(not CapPolicy.is_valid_access_request(request)):
-	if(not RBACPolicy.is_valid_access_request(request)):
+	#if(not RBACPolicy.is_valid_access_request(request)):
+	if(not ABACPolicy.is_valid_access_request(request)):
 		abort(401, {'message': 'Authorization fail, deny access'})
 	#print request.data
 	project_id = request.args.get('project_id', default = 1, type = int)

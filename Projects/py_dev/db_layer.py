@@ -262,6 +262,142 @@ class AccessManager(object):
 		
 		return ls_result
 
+'''
+ABACRuleManager class for manage ABAC rules database by using SQLite lib
+'''
+class ABACRuleManager(object):
+
+	#Create table in db file
+	@staticmethod	
+	def create_table(db_path):
+		conn = sqlite3.connect(db_path)
+		
+		#check whether table already exists
+		cursor = conn.execute("SELECT name from sqlite_master where Type='table' and name='ABACRules';")
+		row_count=0
+		for row in cursor:
+			row_count+=1
+
+		if(row_count==0):
+			#create table
+			conn.execute("CREATE TABLE ABACRules \
+					 (Name           	TEXT 		PRIMARY KEY, \
+					 AttrUser           TEXT 		NOT NULL, \
+					 AttrAction        	TEXT    	NOT NULL, \
+					 AttrResource      	TEXT    	NOT NULL, \
+					 AttrEnvironment    TEXT    	NOT NULL);")
+		else:
+			print("Table:ABACRules already exists.")
+
+	#Remove table
+	def remove_table(db_path):
+		conn = sqlite3.connect(db_path)
+		#remove selected table
+		cursor = conn.execute("DROP TABLE ABACRules;")
+
+	#Select all record from table
+	@staticmethod		
+	def select_Allentry(path_db):
+		conn = sqlite3.connect(path_db)	
+		conn.row_factory = dict_factory
+		cursor = conn.execute("SELECT * from ABACRules;")
+
+		ls_result=[]
+		for row in cursor:	
+			ls_result.append(row)
+
+		conn.close()
+		
+		return ls_result
+
+	#Select record from table based on Name
+	@staticmethod		
+	def select_ByName(path_db, rule_name):
+		conn = sqlite3.connect(path_db)	
+		conn.row_factory = dict_factory
+		cursor = conn.execute("SELECT * from ABACRules where Name='%s';" %(rule_name))
+		
+		ls_result=[]		
+		for row in cursor:
+			ls_result.append(row)
+			
+		conn.close()
+		
+		return ls_result
+
+	#Select record from table based on field Name and value 
+	@staticmethod		
+	def select_ByFieldname(path_db, field_data):
+		conn = sqlite3.connect(path_db)	
+		conn.row_factory = dict_factory
+
+		SQL_cmd="SELECT * from ABACRules where "
+
+		i=0
+		for key, value in field_data.items(): 
+			#print(key, value)
+			if(i>0):
+				SQL_cmd+=(" and ")
+			SQL_cmd+=("%s='%s'" %(key, value))
+			i+=1
+		#print(SQL_cmd)
+		cursor = conn.execute(SQL_cmd)
+		ls_result=[]		
+		for row in cursor:
+			ls_result.append(row)
+			
+		conn.close()
+		
+		return ls_result
+
+	#Insert rule entry into ABACRules table
+	@staticmethod	
+	def insert_entry(path_db, arg_list):	
+		conn = sqlite3.connect(path_db)
+
+		#check if rule name already exist
+		rule_entry=ABACRuleManager.select_ByName(path_db, arg_list['Name'])
+		if(len(rule_entry)>0):
+			print("%s already exists!" %(arg_list['Name']))
+		else:
+			conn.execute("INSERT INTO ABACRules (Name, AttrUser, AttrAction, AttrResource, AttrEnvironment) \
+						VALUES ('%s', '%s','%s','%s', '%s');" \
+						%(	arg_list['Name'], \
+							arg_list['AttrUser'], \
+							arg_list['AttrAction'], \
+							arg_list['AttrResource'], \
+							arg_list['AttrEnvironment']))
+
+			conn.commit()
+		conn.close()
+
+	#Update record of ruledata based on name
+	@staticmethod	
+	def update_entry(path_db, arg_list):
+		conn = sqlite3.connect(path_db)
+		
+		conn.execute("UPDATE ABACRules \
+						set AttrUser='%s', AttrAction='%s', AttrResource='%s', AttrEnvironment='%s' \
+						where Name='%s';" \
+						%(	arg_list['AttrUser'], \
+							arg_list['AttrAction'], \
+							arg_list['AttrResource'], \
+							arg_list['AttrEnvironment'], \
+							arg_list['Name']))
+		
+		conn.commit()
+		conn.close()
+
+	#Delete rule from ABACRules based on Name
+	@staticmethod		
+	def delete_ByName(path_db, rule_name):
+		conn = sqlite3.connect(path_db)
+
+		conn.execute("DELETE from ABACRules where Name = '%s';" %(rule_name))
+		conn.commit()
+		
+		conn.close()
+
 def test_user():
 	#test Api
 	path_db='RBAC.db'
@@ -304,8 +440,8 @@ def generateAdmin():
 	ac_json['conditions']={}
 	#construct condition json data
 	ac_json['conditions']['value']={}
-	ac_json['conditions']['value']['start']='14:12:32'
-	ac_json['conditions']['value']['end']='18:32:32'
+	ac_json['conditions']['value']['start']='16:12:32'
+	ac_json['conditions']['value']['end']='23:32:32'
 	ac_json['conditions']['type']='Timespan' 
 	ac_list.append(ac_json)
 
@@ -317,7 +453,7 @@ def generateAdmin():
 	#construct condition json data
 	ac_json['conditions']['value']={}
 	ac_json['conditions']['value']['start']='8:12:32'
-	ac_json['conditions']['value']['end']='12:32:32'
+	ac_json['conditions']['value']['end']='16:32:32'
 	ac_json['conditions']['type']='Timespan' 
 	ac_list.append(ac_json)
 
@@ -406,11 +542,72 @@ def test_access():
 	print(json_data)
 	print(json_data[0]['conditions']['value']['start'])
 
+def test_ABACRules():
+	#test Api
+	path_db='ABAC.db'
+	# new Userdata table 
+	ABACRuleManager.create_table(path_db)
+	#ABACRuleManager.remove_table(path_db)
+
+	#test insert user data
+	rule_arg = {}
+	rule_arg['Name'] = "rule2"
+	rule_arg['AttrUser'] = "admin"
+	rule_arg['AttrAction'] = "GET"
+	rule_arg['AttrResource'] = "/test/api/v1.0/dt"
+	#define environmental attribute
+	env_time={}
+	env_time['type']='Timespan'
+	env_time['value']={}
+	env_time['value']['start']='14:12:32'
+	env_time['value']['end']='23:12:32'
+	rule_arg['AttrEnvironment'] = TypesUtil.json_to_string(env_time)
+	ABACRuleManager.insert_entry(path_db,rule_arg)
+
+	#search test
+	rules_list=ABACRuleManager.select_Allentry(path_db)
+	print(rules_list)
+	print(TypesUtil.string_to_json(rules_list[0]['AttrEnvironment'])['type'])
+	rules_entry = ABACRuleManager.select_ByName(path_db, 'rule1')
+	print(rules_entry)
+	
+	#build up fields condition
+	field_data = {}
+	#field_data['Name'] = "rule1"
+	field_data['AttrUser'] = "admin"
+	field_data['AttrAction'] = "GET"
+	field_data['AttrResource'] = "/test/api/v1.0/dt/project"
+	#define environmental attribute
+	env_time={}
+	env_time['type']='Timespan'
+	env_time['value']={}
+	env_time['value']['start']='8:12:32'
+	env_time['value']['end']='14:12:32'
+	#field_data['AttrEnvironment'] = TypesUtil.json_to_string(env_time)	
+	#rules_entry = ABACRuleManager.select_ByFieldname(path_db, field_data)
+	#print(rules_entry)
+
+	#update test
+	update_arg=rule_arg
+	update_arg['AttrUser']="admin"
+	update_arg['AttrResource']="/test/api/v1.0/dt/project"
+	env_update=TypesUtil.string_to_json(update_arg['AttrEnvironment'])
+	env_update['value']['start']="13:12:32"
+	env_update['value']['end']="22:12:32"
+	#update_arg['AttrEnvironment']= TypesUtil.json_to_string(env_update)
+	#ABACRuleManager.update_entry(path_db,update_arg)
+	#print(ABACRuleManager.select_ByName(path_db,update_arg['Name']))
+
+	#delete test
+	#ABACRuleManager.delete_ByName(path_db,rule_arg['Name'])
+	#print(ABACRuleManager.select_ByName(path_db,rule_arg['Name']))
+
 
 if __name__ == '__main__': 
 	#test_user()
 	#test_role()
-	test_access()
+	#test_access()
+	test_ABACRules()
 
 	pass
 
