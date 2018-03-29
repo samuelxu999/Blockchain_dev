@@ -154,7 +154,57 @@ class VisualizeData(object):
 		ax.legend(Bar_list[::], x_label[::], loc='upper left')
 		
 		plt.show()
+	
+	'''
+	plot groupbar chart given ls_data
+	'''
+	@staticmethod
+	def plot_groupbar(xtick_label, y_label, legend_label, ls_data):
 		
+		N = len(xtick_label)
+		
+		ind = np.arange(N)  # the x locations for the groups
+		width = 0.30       	# the width of the bars
+		
+		#generate bar axis object
+		fig, ax = plt.subplots()
+		
+		blend_exec_time = ls_data[0]
+		rects_blend = ax.bar(ind, blend_exec_time, width, color='g')
+		
+		rbac_exec_time = ls_data[1]	
+		rects_rbac = ax.bar(ind + width, rbac_exec_time, width, color='r')
+		
+		abac_exec_time = ls_data[2]			
+		rects_abac = ax.bar(ind + 2*width, abac_exec_time, width, color='b')
+		
+		# add some text for labels, title and axes ticks
+		ax.set_ylabel(y_label)
+		#ax.set_title('Execution time by group', fontsize=18)
+		ax.set_xticks(ind + width)
+		ax.set_xticklabels(xtick_label)
+		plt.ylim(0, 280)
+		
+		ax.legend((rects_blend[0], rects_rbac[0], rects_abac[0]), legend_label, loc='upper left', fontsize=14)
+		
+		VisualizeData.autolabel(rects_blend, ax)
+		VisualizeData.autolabel(rects_rbac, ax)
+		VisualizeData.autolabel(rects_abac, ax)
+		
+		plt.show()
+		pass	
+	
+	@staticmethod
+	def autolabel(rects, ax):
+		"""
+		Attach a text label above each bar displaying its height
+		"""
+		for rect in rects:
+			height = rect.get_height()
+			ax.text(rect.get_x() + rect.get_width()/2, (height+0.2),
+			        '%.1f' % height,
+			        ha='center', va='bottom', fontsize=12)
+
 	'''
 	plot lines chart given ls_data
 	'''
@@ -309,12 +359,34 @@ def plot_lines():
 	#print(exec_time_data)
 	obj_label=['No Access Control', 'BlendCAC', 'RBAC', 'ABAC']
 	VisualizeData.plot_CapVsNoCap("", obj_label, 'Time (ms)', exec_time_data)
+
+def plot_groupbar():
+	xtick_label=['Token processing', 'Token validation', 'Access validation', 'Total Delay']
+	legend_label=['BlendCAC', 'RBAC', 'ABAC']
 	
+	#prepare data
+	ls_exec_time=[]
+	blend_exec_time=ExecTime.merge_exec_time('BlendCapAC_contract/exec_time_client.log', 'BlendCapAC_contract/exec_time_server.log')
+	blend_ave_exec_time=ExecTime.calc_exec_time(blend_exec_time)
+	
+	rbac_exec_time=ExecTime.merge_exec_time('RBAC_contract/exec_time_client.log', 'RBAC_contract/exec_time_server.log')
+	rbac_ave_exec_time=ExecTime.calc_exec_time(rbac_exec_time)
+	
+	abac_exec_time=ExecTime.merge_exec_time('ABAC_contract/exec_time_client.log', 'ABAC_contract/exec_time_server.log')
+	abac_ave_exec_time=ExecTime.calc_exec_time(abac_exec_time)
+	
+	#append data to list
+	ls_exec_time.append(blend_ave_exec_time)
+	ls_exec_time.append(rbac_ave_exec_time)
+	ls_exec_time.append(abac_ave_exec_time)
+
+	VisualizeData.plot_groupbar(xtick_label,'Time (ms)', legend_label, ls_exec_time)
 
 if __name__ == "__main__":
-	matplotlib.rcParams.update({'font.size': 18})
+	matplotlib.rcParams.update({'font.size': 16})
 	#plot_bar()
 	#plot_line()
 	#plot_multilines()
-	plot_lines()
+	#plot_lines()
+	plot_groupbar()
 	pass
