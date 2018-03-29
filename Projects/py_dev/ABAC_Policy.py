@@ -150,14 +150,14 @@ class ABACPolicy(object):
 		start_time=time.time()
 
 		# 1) get token from smart contract, high overload
-		#token_data=ABACPolicy.get_token(accountAddr)
+		token_data=ABACPolicy.get_token(accountAddr)
 
 		# 2) Save token data to local token.dat
 		#FileUtil.AddLine('ABAC_token.dat', TypesUtil.json_to_string(token_data))
 
 		# 3) read token from local data, low overload
-		read_token=FileUtil.ReadLines('ABAC_token.dat')
-		token_data=TypesUtil.string_to_json(read_token[0])
+		'''read_token=FileUtil.ReadLines('ABAC_token.dat')
+		token_data=TypesUtil.string_to_json(read_token[0])'''
 		#print(token_data)
 
 		exec_time=time.time()-start_time

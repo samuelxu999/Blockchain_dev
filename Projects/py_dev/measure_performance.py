@@ -253,6 +253,7 @@ class VisualizeData(object):
 		NoCap_delay=[]
 		Cap_delay=[]
 		RBAC_delay=[]
+		ABAC_delay=[]
 		
 		#prepare data for plot
 		i=1
@@ -261,12 +262,14 @@ class VisualizeData(object):
 			NoCap_delay.append(record[0])
 			Cap_delay.append(record[1])
 			RBAC_delay.append(record[2])
+			ABAC_delay.append(record[3])
 			i+=1
 			
 		line_list=[]
 		line_list.append(plt.plot(x, NoCap_delay, lw=1.0, color='gray'))
 		line_list.append(plt.plot(x, Cap_delay, lw=1.0, color='g'))
 		line_list.append(plt.plot(x, RBAC_delay, lw=1.0, color='r'))
+		line_list.append(plt.plot(x, ABAC_delay, lw=1.0, color='b'))
 		plt.xlabel('Run cycles')
 		plt.ylabel(y_label)
 		plt.title(title_name)
@@ -277,7 +280,7 @@ class VisualizeData(object):
 		plt.show()
 
 def plot_bar():
-	exec_time_data=ExecTime.merge_exec_time('RBAC_contract/exec_time_client.log', 'RBAC_contract/exec_time_server.log')
+	exec_time_data=ExecTime.merge_exec_time('ABAC_contract/exec_time_client.log', 'ABAC_contract/exec_time_server.log')
 	#print(exec_time_data)
 	ave_exec_time=ExecTime.calc_exec_time(exec_time_data)
 	
@@ -300,10 +303,11 @@ def plot_lines():
 	file_list=['CapVsNoCap/exec_time_client_NoCap.log']
 	file_list.append('BlendCapAC_optimized/exec_time_client.log')
 	file_list.append('RBAC_optimized/exec_time_client.log')
+	file_list.append('ABAC_optimized/exec_time_client.log')
 	exec_time_data=ExecTime.merge_files(file_list)
 	
 	#print(exec_time_data)
-	obj_label=['No Access Control', 'BlendCAC', 'RBAC']
+	obj_label=['No Access Control', 'BlendCAC', 'RBAC', 'ABAC']
 	VisualizeData.plot_CapVsNoCap("", obj_label, 'Time (ms)', exec_time_data)
 	
 
