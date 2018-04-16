@@ -82,21 +82,18 @@ class DelegateToken(object):
 		# Execute the specified function by sending a new public transaction.
 		ret=self.contract.transact({'from': self.web3.eth.coinbase}).initTree()
 
+	# set delegateDepth to call setTreeDepth()
+	def setDelegateDepth(self, delegateDepth):
+		# Execute the specified function by sending a new public transaction.
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setTreeDepth(delegateDepth)
+
 	#add token by sending transact to call addDelToken()
-	def addDelToken(self, account_addr, privilege):
+	def addDelToken(self, account_addr):
 		#Change account address to EIP checksum format
 		delegatee = Web3.toChecksumAddress(account_addr)
 
 		# Execute the specified function by sending a new public transaction.
-		ret=self.contract.transact({'from': self.web3.eth.coinbase}).addDelToken(delegatee, privilege)
-
-	# update privilege  by sending transact to call setPrivilege()
-	def setPrivilege(self, account_addr, privilege):
-		#Change account address to EIP checksum format
-		delegatee = Web3.toChecksumAddress(account_addr)
-
-		# Execute the specified function by sending a new public transaction.
-		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setPrivilege(delegatee, privilege)
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).addDelToken(delegatee)
 
 	# revoke delegatee by sending transact to call revokeDelToken()
 	def revokeDelToken(self, account_addr):
@@ -106,10 +103,26 @@ class DelegateToken(object):
 		# Execute the specified function by sending a new public transaction.
 		ret=self.contract.transact({'from': self.web3.eth.coinbase}).revokeDelToken(delegatee)
 
+	# update privilege in node by sending transact to call setPrivilege()
+	def setPrivilege(self, account_addr, privilege):
+		#Change account address to EIP checksum format
+		delegatee = Web3.toChecksumAddress(account_addr)
+
+		# Execute the specified function by sending a new public transaction.
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setPrivilege(delegatee, privilege)
+
+	# update delegateWidth of node by sending transact to call setDelegateWidth()
+	def setDelegateWidth(self, account_addr, delegateWidth):
+		#Change account address to EIP checksum format
+		delegatee = Web3.toChecksumAddress(account_addr)
+
+		# Execute the specified function by sending a new public transaction.
+		ret=self.contract.transact({'from': self.web3.eth.coinbase}).setDelegateWidth(delegatee, delegateWidth)
+
 
 if __name__ == "__main__":
 	http_provider = 'http://localhost:8042'
-	contract_addr = '0xa664086a61fa26ef4d9041f8b34ae6b19443d382'
+	contract_addr = '0x5c142736b7c74ebe1183dbb1361cb58b65144044'
 	contract_config = '../CapbilityToken/build/contracts/DelegateToken.json'
 
 	#Get account address
@@ -142,7 +155,7 @@ if __name__ == "__main__":
 	print(token_status)
 	root_node=mytoken.getDelToken(token_status[0]);
 	DelegateToken.print_tokendata(root_node)
-	token_data=mytoken.getDelToken(accountAddr1);
+	token_data=mytoken.getDelToken(accountAddr);
 	DelegateToken.print_tokendata(token_data)
 	
 	# list Access control
@@ -152,9 +165,11 @@ if __name__ == "__main__":
 	print(json_data['conditions'])'''
 
 	#Send transact
-	#mytoken.initDelegateTree();
-	#mytoken.addDelToken(accountAddr1, 'new delegatee')
-	#mytoken.setPrivilege(accountAddr1, 'update delegatee')
-	#mytoken.revokeDelToken(accountAddr1)
+	#mytoken.initDelegateTree()
+	#mytoken.setDelegateDepth(6)
+	#mytoken.addDelToken(accountAddr)
+	#mytoken.setPrivilege(accountAddr, 'update delegatee')
+	#mytoken.setDelegateWidth(accountAddr, 6)
+	#mytoken.revokeDelToken(accountAddr)
 
 	pass
