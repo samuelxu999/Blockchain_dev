@@ -122,7 +122,7 @@ class DelegateToken(object):
 
 if __name__ == "__main__":
 	http_provider = 'http://localhost:8042'
-	contract_addr = '0x5c142736b7c74ebe1183dbb1361cb58b65144044'
+	contract_addr = '0xbbc8eb18b19fce1457c14953e52bbc7b5f2fad3f'
 	contract_config = '../CapbilityToken/build/contracts/DelegateToken.json'
 
 	#Get account address
@@ -167,9 +167,9 @@ if __name__ == "__main__":
 	#Send transact
 	#mytoken.initDelegateTree()
 	#mytoken.setDelegateDepth(6)
-	#mytoken.addDelToken(accountAddr)
+	#mytoken.addDelToken(accountAddr0)
 	#mytoken.setPrivilege(accountAddr, 'update delegatee')
 	#mytoken.setDelegateWidth(accountAddr, 6)
-	#mytoken.revokeDelToken(accountAddr)
+	#mytoken.revokeDelToken(accountAddr4)
 
 	pass

@@ -187,7 +187,7 @@ contract DelegateToken {
 			return false;
 
 		// if depth of delegator is excel maximum delegation progagation depth
-		if(delTree.nodes[delegatee].depth >= delTree.delegateDepth) 
+		if(delTree.nodes[msg.sender].depth >= delTree.delegateDepth) 
 			//do nothing
 			return false;			
 		
