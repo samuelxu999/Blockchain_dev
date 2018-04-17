@@ -108,4 +108,22 @@ reference:http://chainskills.com/2017/04/10/raspberry-pi-and-ethereum-the-epilog
 		
 	5) In general, test scripts are saved in ./test folder, you could execute test script like:
 		pi$ node ./test/wc3_test_token.js
+
+---------------------------------------------------------------------------------------------
+								Python Development-Web3
+reference:http://web3py.readthedocs.io/en/stable/quickstart.html#environment
+---------------------------------------------------------------------------------------------	
+1) Prerequisite
+	Basic:
+		sudo apt-get install python-pip python-dev build-essential
+		sudo apt-get install python-setuptools 
+	
+	python3.5:
+		sudo apt-get install python3-pip python3-dev python3-setuptools
+		sudo python3.5 -m pip install pip --upgrade
+		sudo python3.5 -m pip install setuptools --upgrade
+		
+2) Install Web3
+	sudo python3.5 -m pip install web3
+
 			
