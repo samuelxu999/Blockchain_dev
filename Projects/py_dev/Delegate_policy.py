@@ -131,9 +131,9 @@ class DelegatePolicy(object):
 			return False	
 
 		# set privilege
-		'''mytoken.addDelToken(delegateeAddr)
-		mytoken.setDelegateWidth(delegateeAddr, 2)
-		mytoken.setPrivilege(delegateeAddr, authorize_ar)'''
+		mytoken.addDelToken(delegateeAddr)
+		mytoken.setDelegateWidth(delegateeAddr, 3)
+		mytoken.setPrivilege(delegateeAddr, authorize_ar)
 		#print(authorize_ar)
 
 		return True
@@ -172,7 +172,7 @@ class DelegatePolicy(object):
 				return False
 			else:
 				print("Revoke by root node!")
-				#mytoken.revokeDelToken(delegateeAddr)
+				mytoken.revokeDelToken(delegateeAddr)
 		else:
 			# Not delegated node, skip reviocation
 			if(json_delegatee['parent']==address_zero):
@@ -185,6 +185,7 @@ class DelegatePolicy(object):
 				return False
 
 			print("Revoke by ancestor node!")
+			mytoken.revokeDelToken(delegateeAddr)
 
 		return True
 		
@@ -209,9 +210,8 @@ if __name__ == "__main__":
 					'setCapToken_isValid',
 					'setCapToken_revokeDelegate']
 
-	print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR))
+	#print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR))
 
 	#print(DelegatePolicy.revoke_delegate(accountAddr5))
 
-	#print(DelegatePolicy.isAncestor(rootAddr, accountAddr5))
 	pass
