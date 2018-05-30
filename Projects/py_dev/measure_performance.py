@@ -381,6 +381,22 @@ def plot_groupbar():
 	ls_exec_time.append(abac_ave_exec_time)
 
 	VisualizeData.plot_groupbar(xtick_label,'Time (ms)', legend_label, ls_exec_time)
+	
+def plot_BlockTime():
+		miners=[2,3,4,5,6,7]
+		block_time=[16.07, 15.65, 13.58, 9.37, 7.73, 7.95]
+		
+		plt.plot(miners, block_time, lw=1.0, color='green')
+		plt.xlabel('Miner count')
+		plt.ylabel('Time (sec)')
+		plt.title("Block Average Generated Time")
+		plt.ylim(0, 20)
+		for x,y in zip(miners, block_time): 
+			plt.plot(x, y, "b^")
+			plt.text(x-0.1, y+0.5, str(y))
+		
+		#show plot
+		plt.show()
 
 if __name__ == "__main__":
 	matplotlib.rcParams.update({'font.size': 16})
@@ -388,5 +404,6 @@ if __name__ == "__main__":
 	#plot_line()
 	#plot_multilines()
 	#plot_lines()
-	plot_groupbar()
+	#plot_groupbar()
+	plot_BlockTime()
 	pass
