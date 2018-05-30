@@ -75,6 +75,11 @@ if __name__ == "__main__":
 	BCPerformance.getBlocknumber()
 	BCPerformance.getAccounts()
 	#print(web3.eth.getTransaction('0xbd358846c24c421056d86af0d042ec1a59a97be40b485acc2c3e209c5a6785e3'))
-	print(BCPerformance.calculate_blocktime(60, 41765))
-	print(BCPerformance.calculate_transactionGas(1000))
+	print("2 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 41765)))
+	print("3 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 41825)))
+	print("4 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 41885)))
+	print("5 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 41945)))
+	print("6 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 42010)))
+	print("7 miners: %.2f" %(BCPerformance.calculate_blocktime(60, 42150)))
+	print("Average gas for transaction: %.2f" %(BCPerformance.calculate_transactionGas(1000)))
 	pass
