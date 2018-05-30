@@ -132,7 +132,7 @@ class DelegatePolicy(object):
 
 		# set privilege
 		mytoken.addDelToken(delegateeAddr)
-		mytoken.setDelegateWidth(delegateeAddr, 3)
+		mytoken.setDelegateWidth(delegateeAddr, deleWidth)
 		mytoken.setPrivilege(delegateeAddr, authorize_ar)
 		#print(authorize_ar)
 
@@ -203,15 +203,15 @@ if __name__ == "__main__":
 	accountAddr5 = '0xfa4c5d320d638cbdff557c4c1f3110d3143f40c3'
 	accountAddr6 = '0x781008570ef49283518c09007092b8341c5d040a'
 
-	#delegate_data = DelegatePolicy.get_delegateToken(rootAddr)
-	#print(delegate_data)
+	delegate_data = DelegatePolicy.get_delegateToken(accountAddr4)
+	print(delegate_data)
 
 	ls_delegateAR=['initCapToken', 
 					'setCapToken_isValid',
 					'setCapToken_revokeDelegate']
 
-	#print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR))
+	#print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR, 3))
 
-	#print(DelegatePolicy.revoke_delegate(accountAddr5))
+	#print(DelegatePolicy.revoke_delegate(accountAddr4))
 
 	pass
