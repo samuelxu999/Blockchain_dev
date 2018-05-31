@@ -50,7 +50,7 @@ class DelegatePolicy(object):
 		json_token['root_node'] = root_status[0]
 		json_token['max_depth'] = root_status[1]
 
-		delToken = mytoken.getDelToken(accountAddr);
+		delToken = mytoken.getDelToken(accountAddr)
 		#print(delToken)
 		json_token['parent'] = delToken[0]
 		json_token['children'] = delToken[1]
@@ -58,7 +58,10 @@ class DelegatePolicy(object):
 		json_token['max_width'] = delToken[3]
 		json_token['privilege'] = delToken[4]
 
-		return json_token
+		json_IDC = {}
+		json_IDC['identity'] = accountAddr
+		json_IDC['certificate'] = json_token
+		return json_IDC
 
 	# calculate children nodes count
 	@staticmethod
@@ -72,26 +75,44 @@ class DelegatePolicy(object):
 	# delegation authorization
 	@staticmethod
 	def authorize_delegate(delegateeAddr, delegate_ar=[], deleWidth = 1):
+		# get current node address
 		BaseAddr = web3.eth.coinbase
-		json_delegator = DelegatePolicy.get_delegateToken(BaseAddr)
-		json_delegatee = DelegatePolicy.get_delegateToken(delegateeAddr)
-		print(json_delegator)
-		print(json_delegatee)
 
+		# get IDC for smart contract
+		IDC_delegator = DelegatePolicy.get_delegateToken(BaseAddr)
+		IDC_delegatee = DelegatePolicy.get_delegateToken(delegateeAddr)
+		print(IDC_delegator)
+		print(IDC_delegatee)
+
+		# extract certificate from IDC
+		json_delegator  = IDC_delegator['certificate']
+		json_delegatee = IDC_delegatee['certificate']
 		authorize_ar = ""
 
+		# --------------------------------- delegation process --------------------------------
+		#1) if delegatee node is root node(supervisor), do not delegate anymore
+		if(delegateeAddr == json_delegator['root_node']):
+			print("Delegatee node %s is supervisor which is not allowed to be delegated!" %(IDC_delegatee['identity']))
+			return False
+
+		#2) if delegatee node has been delegated, do not delegate anymore
+		if(json_delegatee['parent']!=address_zero):
+			print("Delegatee node %s has been delegated by %s!" %(json_delegatee['parent'], json_delegator['parent']))
+			return False
+
+		#3) check if children node of delegator is full
+		if(DelegatePolicy.get_childrenCount(json_delegator['children'])>=json_delegator['max_width']):
+			print("Chindren count of delegator has approached max_width, delegation is not allowed!")
+			return False
+
+		#4) check if delegator depth is excel max_depth
+		if(json_delegator['depth']>=json_delegator['max_depth']):
+			print("delegator depth has approached max_depth, delegation is not allowed!")
+			return False
+
+		#5) Verify delegated permissions
 		#A) Delegator node is supervisor
 		if(BaseAddr==json_delegator['root_node']):
-			# check if children node of delegator is full
-			if(DelegatePolicy.get_childrenCount(json_delegator['children'])>=json_delegator['max_width']):
-				print("Chindren count of delegator has approached max_width, delegation is not allowed!")
-				return False
-
-			# check if delegator depth is excel max_depth
-			if(json_delegator['depth']>=json_delegator['max_depth']):
-				print("delegator depth has approached max_depth, delegation is not allowed!")
-				return False
-
 			#authorize delegated access right			
 			for ar in delegate_ar:
 				#only subset of full AR is allowed to delegate
@@ -100,22 +121,7 @@ class DelegatePolicy(object):
 					authorize_ar += (ar + ';')
 		
 		#B) Delegator node is not supervisor
-		else:			
-			#1) if delegatee node has been delegated, do not delegate anymore
-			if(json_delegatee['parent']!=address_zero):
-				print("Delegatee %s node has been delegated by %s!" %(json_delegatee['parent'], json_delegator['parent']))
-				return False
-			
-			# check if children node of delegator is full
-			if(DelegatePolicy.get_childrenCount(json_delegator['children'])>=json_delegator['max_width']):
-				print("Chindren count of delegator has approached max_width, delegation is not allowed!")
-				return False
-
-			# check if delegator depth is excel max_depth
-			if(json_delegator['depth']>=json_delegator['max_depth']):
-				print("delegator depth has approached max_depth, delegation is not allowed!")
-				return False
-			
+		else:						
 			delgator_ar=json_delegator['privilege'].split(';')
 			
 			# for each delegate access right list
@@ -127,10 +133,11 @@ class DelegatePolicy(object):
 		
 		# no valid access is allowed to delegate
 		if(authorize_ar==''):
-			print("No access right is allow to delegate!")
+			print("No access right is allow to be delegated!")
 			return False	
 
-		# set privilege
+		#6) set privilege
+		print("Authorize delegation!")
 		mytoken.addDelToken(delegateeAddr)
 		mytoken.setDelegateWidth(delegateeAddr, deleWidth)
 		mytoken.setPrivilege(delegateeAddr, authorize_ar)
@@ -162,8 +169,10 @@ class DelegatePolicy(object):
 	@staticmethod
 	def revoke_delegate(delegateeAddr):
 		BaseAddr = web3.eth.coinbase
-		json_delegatee = DelegatePolicy.get_delegateToken(delegateeAddr)
-		print(json_delegatee)
+		IDC_delegatee = DelegatePolicy.get_delegateToken(delegateeAddr)
+		print(IDC_delegatee)
+
+		json_delegatee = IDC_delegatee['certificate']
 
 		#1) current node is supervisor/root node.
 		if(BaseAddr==json_delegatee['root_node']):
@@ -210,7 +219,7 @@ if __name__ == "__main__":
 					'setCapToken_isValid',
 					'setCapToken_revokeDelegate']
 
-	#print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR, 3))
+	#print(DelegatePolicy.authorize_delegate(accountAddr4, ls_delegateAR, 1))
 
 	#print(DelegatePolicy.revoke_delegate(accountAddr4))
 
