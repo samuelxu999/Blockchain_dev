@@ -148,20 +148,27 @@ class DelegatePolicy(object):
 	# check if current node is ancestor of delegatee node
 	@staticmethod
 	def isAncestor(ancestorAddr, delegateeAddr):
+		# get current node address
 		BaseAddr = web3.eth.coinbase
-		json_delegate = DelegatePolicy.get_delegateToken(delegateeAddr)
+
+		# get IDC from smart contract
+		IDC_delegate = DelegatePolicy.get_delegateToken(delegateeAddr)
+
+		# extract certificate from IDC
+		json_delegate = IDC_delegate['certificate']
 		depth = json_delegate['depth']
 		parent = json_delegate['parent']
 
-		i=0
-		while(i < depth):
+		# find ancestor in delegate path
+		curr_depth = 0
+		while(curr_depth < depth):
 			if(ancestorAddr == parent):
 				# find ancestor in delegate path
 				return True
 			# search ancestor in parent node
 			json_delegate = DelegatePolicy.get_delegateToken(parent)
 			parent = json_delegate['parent']
-			i+=1
+			curr_depth += 1
 
 		return False
 
