@@ -166,7 +166,11 @@ class DelegatePolicy(object):
 				# find ancestor in delegate path
 				return True
 			# search ancestor in parent node
-			json_delegate = DelegatePolicy.get_delegateToken(parent)
+			
+			# get IDC from smart contract
+			IDC_delegate = DelegatePolicy.get_delegateToken(parent)
+			# extract certificate from IDC
+			json_delegate = son_delegate = IDC_delegate['certificate']
 			parent = json_delegate['parent']
 			curr_depth += 1
 
