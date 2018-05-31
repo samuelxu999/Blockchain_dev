@@ -166,7 +166,7 @@ class DelegatePolicy(object):
 				# find ancestor in delegate path
 				return True
 			# search ancestor in parent node
-			
+
 			# get IDC from smart contract
 			IDC_delegate = DelegatePolicy.get_delegateToken(parent)
 			# extract certificate from IDC
@@ -201,7 +201,7 @@ class DelegatePolicy(object):
 
 			if( (BaseAddr != delegateeAddr) and 
 				(DelegatePolicy.isAncestor(BaseAddr, delegateeAddr) == False) ):
-				print("Either owner or ancestor, revocation is not allowed!")
+				print("Neither supervisor nor ancestor, revocation is not allowed!")
 				return False
 
 			print("Revoke by ancestor node!")
