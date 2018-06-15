@@ -7,10 +7,11 @@ Private Ethereum network setup
 	|--- /miner2: miner2 configuration and scripts on Ununtu.
 	|--- /miner_win7: miner configuration and scripts on window 7 OS.
 	|--- /node: node configuration and scripts on Raspberry Pi and Tinker board which are enpowered by Debian Linux on ARM.
-	|--- genesis.json: genesis data for network initialization.
-	|--- init_miners.sh: miner initialization script
-	|--- init_node.sh: node initialization script
-	|--- static-nodes.json: record all paired node information.
+	|--- /genesis.json: genesis data for network initialization.
+	|--- /init_miners.sh: miner initialization script
+	|--- /init_node.sh: node initialization script
+	|--- /static-nodes.json: record all paired node information.
+	|--- /Setup_private_Ethereum_network_with_IoT_devices.pdf: Turorials to instruct how to setup private Ethereum network including computers and Raspberry pi.
 	
 ## Projects
 	|--- /CapbilityToken: truffle project folder to develop smart contract using soliditon.
