@@ -31,4 +31,5 @@ The BlendCAC development project including:
 
 ## Environment Setup	
 The environement configuration includs: Prerequisite, Ethereum Blockchain setup and Smart Contract Development toolkit. Refer to env_setup.txt for detail.
+
 --- env_setup.txt: The blockchain network and application development environment setup instruction.
