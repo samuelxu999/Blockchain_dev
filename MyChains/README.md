@@ -13,7 +13,7 @@ miner2 configuration and startup scripts on Ubuntu OS.
 
 ### miner_win7
 miner configuration and startup scripts on window 7 OS. 
---- startminer.sh: start up ethereum client as miner on window system.
+--- startminer.sh: start up ethereum client as miner on window 7 system.
 
 ### node
 node configuration and startup scripts running on Raspberry Pi and Tinker board which are enpowered by Debian Linux on ARM.
