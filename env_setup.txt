@@ -57,13 +57,15 @@ Method 2): Build from source code
 		git clone https://github.com/ethereum/go-ethereum.git
 	2) Ether go-ethereum
 		cd go-ethereum
-	3) build geth
+	3  We use v1.7.3 for our project
+		git checkout v1.7.3
+	4) build geth
 		make geth
 	This will take several minutes to be done.
-	4) Add go-ethereum executable bin path in ~/.bashrc
+	5) Add go-ethereum executable bin path in ~/.bashrc
 		export GOETHEREUM=~/Desktop/Github/Blockchain_dev/dev_sdk/ethereum/go-ethereum/build
 		export PATH=$PATH:$GOETHEREUM/bin
-	5) Check version 
+	6) Check version 
 		geth version
 
 ---------------------------------------------------------------------------------------------
