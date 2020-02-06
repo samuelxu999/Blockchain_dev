@@ -1,0 +1,137 @@
+================ Tendermint development environment setup on Linux =======================
+
+---------------------------------------------------------------------------------------------
+								Prerequisite and Dependencies
+---------------------------------------------------------------------------------------------
+A) As a first thing we start by updating our software
+	sudo apt-get update	
+
+B) Python Prerequisite
+	Basic:
+		sudo apt-get install python-pip python-dev build-essential
+		sudo apt-get install python-setuptools 
+		sudo python -m pip install pip --upgrade
+		sudo python -m pip install setuptools --upgrade
+	
+	python3.X:
+		sudo apt-get install python3-pip python3-dev python3-setuptools
+		sudo python3 -m pip install pip --upgrade
+		sudo python3 -m pip install setuptools --upgrade
+
+
+------------------------------------------------------------------------------------------
+                   					Docker installation
+refer to https://docs.docker.com/install/
+------------------------------------------------------------------------------------------
+A) Install Docker Engine And Docker Compose
+	1) Install Docker:
+		sudo curl -sSL https://get.docker.com | sh
+
+	2) Adding your user to the "docker" group with something like:
+		sudo usermod -aG docker @username
+
+	3) Install docker compose:
+		sudo pip install docker-compose
+
+B) ---------------- Update docker to specific version (Optional)  --------------------
+	Since convenient scripts will install edge and testing versions of Docker CE, and it will not work on current OS.
+	The following step to install a specific version to work properly on host:
+
+	1) To install a specific version of Docker CE, list the available versions in the repo, then select and install:
+		sudo apt-cache madison docker-ce
+
+	2) Install a specific version by its fully qualified package name, which is package name (docker-ce) “=” version string (2nd column), 
+	for example, docker-ce=18.03.0~ce-0~ubuntu
+		sudo apt-get install -y docker-ce=18.04.0~ce~3-0~debian
+
+C) ---------------- Verify whether Docker CE installed correctly -----------
+	Verification is performed by running the hello-world image.
+		sudo docker run hello-world
+
+D) ---------------------  Upadte docer-ce -----------------------------------
+		sudo apt-get update -y
+			
+------------------------------------------------------------------------------------------
+                   					Go installation
+------------------------------------------------------------------------------------------
+	Not suggest use: `sudo apt-get install golang` to install golang
+	All golang package can be found on https://golang.org/dl/
+	First of all, download go package and extract to /usr/local
+	--- For Raspberry pi:
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-armv6l.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-armv6l.tar.gz
+	
+	--- For Ubuntu
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
+	
+	Add GOROOT and GOPATH env variables and append them to PATH
+	GOROOT: go_lang library and tools 
+	GOGOPATH: go application work directory 
+	1) open ~/.bashrc file
+		pico ~/.bashrc
+
+	2) Append following to end of file
+		export GOROOT=/usr/local/go
+		export PATH=$PATH:$GOROOT/bin	
+		export GOPATH=$HOME/Desktop/Github/Blockchain_dev/dev_sdk/go_proj
+		export PATH=$PATH:$GOPATH/bin
+
+	3) activate env
+		source ~/.bashrc
+	
+---------------------------------------------------------------------------------------------
+	Test installation
+		go version
+		docker -v
+		docker-compose -v
+		pip -V
+		git --version
+---------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------
+								Tendermint Blockchain
+---------------------------------------------------------------------------------------------
+The following instruction introduce How to install an Tendermint blockchain node on Linux OS, 
+like Raspberry Pi 3 and Ununtu.
+Reference: https://docs.tendermint.com/master/introduction/install.html
+Version: 0.32.8
+
+Method 1): Build from source code
+	A) As a first thing we start by updating our software
+		sudo apt-get update
+	
+	B) Get Source Code
+		mkdir -p $GOPATH/src/github.com/tendermint		
+		cd $GOPATH/src/github.com/tendermint
+		git clone https://github.com/tendermint/tendermint.git
+		cd tendermint
+	C) Get Tools & Dependencies
+		make tools
+		
+	D) Compile & Install
+		make install
+		
+	E) Test tendermint
+		tendermint version
+
+
+---------------------------------------------------------------------------------------------
+								Python Development Toolkits
+reference:
+---------------------------------------------------------------------------------------------	
+1) Prerequisite
+	Basic:
+		sudo apt-get install python-pip python-dev build-essential
+		sudo apt-get install python-setuptools 
+	
+	python3.X:
+		sudo apt-get install python3-pip python3-dev python3-setuptools
+		sudo python3.X -m pip install pip --upgrade
+		sudo python3.X -m pip install setuptools --upgrade
+		
+2) Install Web3
+	sudo python3.5 -m pip install web3
+
+			
