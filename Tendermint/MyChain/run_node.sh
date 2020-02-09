@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NODE_DIR='./node'
+ABCI_APP=$1
 
 
 # Referenc: https://docs.tendermint.com/master/introduction/quick-start.html
@@ -27,6 +28,19 @@ IP4='128.226.79.31'
 
 PEERS="$ID0@$IP0:26656,$ID1@$IP1:26656,$ID2@$IP2:26656,$ID3@$IP3:26656,$ID4@$IP4:26656"
 
-#Run Cluster of Nodes
-tendermint node --home $NODE_DIR --p2p.persistent_peers="$PEERS"
+if  [ "" == "$ABCI_APP" ] ; then
+	# Run default kvstore demo abci application
+	abci-cli kvstore &
+
+	#Run Cluster of Nodes
+	tendermint node --home $NODE_DIR --proxy_app=kvstore --p2p.persistent_peers="$PEERS"	
+
+else
+	# Run abci application given by parameter
+	abci-cli $ABCI_APP &
+
+	#Run Cluster of Nodes
+	tendermint node --home $NODE_DIR --p2p.persistent_peers="$PEERS"
+fi
+
 
