@@ -28,5 +28,5 @@ IP4='128.226.79.31'
 PEERS="$ID0@$IP0:26656,$ID1@$IP1:26656,$ID2@$IP2:26656,$ID3@$IP3:26656,$ID4@$IP4:26656"
 
 #Run Cluster of Nodes
-tendermint node --home $NODE_DIR --proxy_app=kvstore --p2p.persistent_peers="$PEERS"
+tendermint node --home $NODE_DIR --p2p.persistent_peers="$PEERS"
 

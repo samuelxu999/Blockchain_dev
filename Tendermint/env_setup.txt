@@ -116,6 +116,24 @@ Method 1): Build from source code
 	E) Test tendermint
 		tendermint version
 
+--------------------------------- Using ABCI-CLI -------------------------------
+Reference: https://docs.tendermint.com/master/app-dev/abci-cli.html
+	A) Install abci. cd to Tendermint folder, then execute:
+		make install_abci
+		
+	B) Now run abci-cli to see the list of commands:
+		abci-cli
+		
+	C) Start kvstore abci demo
+		abci-cli kvstore
+		
+	D) Run run a Tendermint node
+		tendermint node --home $NODE_DIR
+	
+	E) Launch a abci-console to interact with tendermint node
+		abci-cli console
+
+
 
 ---------------------------------------------------------------------------------------------
 								Python Development Toolkits
