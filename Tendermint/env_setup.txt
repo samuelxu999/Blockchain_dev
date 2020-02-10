@@ -134,10 +134,8 @@ Reference: https://docs.tendermint.com/master/app-dev/abci-cli.html
 		abci-cli console
 
 
-
 ---------------------------------------------------------------------------------------------
 								Python Development Toolkits
-reference:
 ---------------------------------------------------------------------------------------------	
 1) Prerequisite
 	Basic:
@@ -149,7 +147,15 @@ reference:
 		sudo python3.X -m pip install pip --upgrade
 		sudo python3.X -m pip install setuptools --upgrade
 		
-2) Install Web3
-	sudo python3.5 -m pip install web3
+2)  (Optional) Install py-abci if you want to develop python ABCI apps to accesss tendermint
+	python -m pip install abci
+	python3 -m pip install abci
+	
+3) (Optional) Install PycURL: http://pycurl.io/docs/latest/install.html#install
+	sudo apt install libcurl4-gnutls-dev
+	sudo apt install python-pycurl
+	sudo apt install python3-pycurl
+
+	
 
 			
