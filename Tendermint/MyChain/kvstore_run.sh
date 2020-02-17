@@ -26,9 +26,6 @@ for k in $(jq  'keys | .[]' $PEER_NODES); do
 	# echo $PEER
 done
 
-echo $PEERS
-
-echo `jq .[].ip $PEER_NODES`
 
 if  [ "" == "$ABCI_APP" ] ; then
 	# Run default kvstore demo abci application
