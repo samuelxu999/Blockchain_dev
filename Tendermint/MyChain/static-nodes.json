@@ -1,0 +1,27 @@
+{
+	"sam_ubuntu18_redbarn": 
+	{
+		"address": "87ab784fb6e8d448d03340aeb02ff0ee4b2996dc",
+		"ip": "128.226.88.250"
+	},
+	"Pi4_R1_1": 
+	{
+		"address": "515abc266fc331897c5993d3be3c2c549bcce54b",
+		"ip": "128.226.77.157"
+	},
+	"Pi4_R1_2": 
+	{
+		"address": "14583fee32f315bf6344a3394690586a060f1034",
+		"ip": "128.226.78.128"
+	},
+	"Pi4_R1_3": 
+	{
+		"address": "9ce231c713ea7f9b0e3a193c5dbf08be2f0f0b68",
+		"ip": "128.226.88.155"
+	},
+	"Pi4_R1_4": 
+	{
+		"address": "4db2fe714d7321bbd51fb56a1c4ec70ae1d8f3b2",
+		"ip": "128.226.79.31"
+	}
+}
