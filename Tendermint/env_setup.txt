@@ -18,6 +18,9 @@ B) Python Prerequisite
 		sudo python3 -m pip install pip --upgrade
 		sudo python3 -m pip install setuptools --upgrade
 
+C) Other tools:
+	jq used for handle json data
+		sudo apt-get install jq
 
 ------------------------------------------------------------------------------------------
                    					Docker installation
