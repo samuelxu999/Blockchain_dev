@@ -14,20 +14,31 @@ A) Install Docker Engine And Docker Compose
 			
 
 B) Install Go language:
-	#Not suggest use: `sudo apt-get install golang` to install golang
-	#All golang package can be found on https://golang.org/dl/
-	# First of all, download go package and extract to /usr/local
-	#For Raspberry pi:
-	wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
-	sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
+	Not suggest use: `sudo apt-get install golang` to install golang
+	All golang package can be found on https://golang.org/dl/
+	First of all, download go package and extract to /usr/local
+	--- For Raspberry pi:
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-armv6l.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-armv6l.tar.gz
 	
-	#For Ubuntu
-	wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz
-	sudo tar -C /usr/local -xzf go1.9.3.linux-amd64.tar.gz
+	--- For Ubuntu
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
 	
-	# Add GOROOT and append to PATH
-	sudo echo ‘export GOROOT=/usr/local/go’ >> ~/.bashrc
-	sudo echo ‘export PATH=$PATH:$GOROOT/bin’ >> ~/.bashrc	
+	Add GOROOT and GOPATH env variables and append them to PATH
+	GOROOT: go_lang library and tools 
+	GOGOPATH: go application work directory 
+	1) open ~/.bashrc file
+		pico ~/.bashrc
+
+	2) Append following to end of file
+		export GOROOT=/usr/local/go
+		export PATH=$PATH:$GOROOT/bin	
+		export GOPATH=$HOME/Desktop/Github/Blockchain_dev/dev_sdk/go_proj
+		export PATH=$PATH:$GOPATH/bin
+
+	3) activate env
+		source ~/.bashrc	
 	
 
 C) Reboot & Test
@@ -51,21 +62,34 @@ Method 1): Install pre-compiled Geth
 		export PATH=$PATH:/usr/local/geth to the /etc/profile 
 	
 Method 2): Build from source code
-	As a firstt thing we start by updating our software
+	A) As a firstt thing we start by updating our software
 		sudo apt-get update
-	1) download from official ethereum repository the Geth client
+
+	B) Get Source Code
+		mkdir -p $GOPATH/src/github.com/ethereum
+		cd $GOPATH/src/github.com/ethereum
 		git clone https://github.com/ethereum/go-ethereum.git
-	2) Ether go-ethereum
+
+	C) Ether go-ethereum
 		cd go-ethereum
-	3  We use v1.7.3 for our project
-		git checkout v1.7.3
-	4) build geth
+	# We use v1.9.9 for our project, so check out version based on tag
+		git checkout v1.9.9
+
+	D) build geth. This will take several minutes to be done.
 		make geth
-	This will take several minutes to be done.
-	5) Add go-ethereum executable bin path in ~/.bashrc
-		export GOETHEREUM=~/Desktop/Github/Blockchain_dev/dev_sdk/ethereum/go-ethereum/build
-		export PATH=$PATH:$GOETHEREUM/bin
-	6) Check version 
+
+	E) Add go-ethereum executable bin path in ~/.bashrc
+		1) open ~/.bashrc file
+			pico ~/.bashrc
+
+		2) Append following to end of file
+			export GOETHEREUM=$GOPATH/src/github.com/ethereum/go-ethereum/build
+			export PATH=$PATH:$GOETHEREUM/bin
+
+		3) activate env
+			source ~/.bashrc
+
+	F) Check version 
 		geth version
 
 ---------------------------------------------------------------------------------------------
@@ -74,42 +98,39 @@ reference:http://chainskills.com/2017/04/10/raspberry-pi-and-ethereum-the-epilog
 ---------------------------------------------------------------------------------------------
 1) Prerequisite: make sure your Pi has node installed, if not, try install npm and node.js first.
 	Install node.js by executing:
-		pi$ curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-		pi$ sudo apt-get install nodejs
+		curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -		
+		sudo apt-get install nodejs
+
 	
 	Test installation:
-		pi$ node -v
-		v7.4.0
+		node -v
+		npm -v
 
-		pi$ npm -v
-		4.0.5
 		
 2) We use truffle as development IDE, http://truffleframework.com/docs/
 	Install truffle on RPI:
-		pi$ sudo npm install -g truffle
+		sudo npm install -g truffle
 	
 	Test installation:
-		pi$ truffle version
-		Truffle v4.0.6 (core: 4.0.6)
-		Solidity v0.4.19 (solc-js)
+		truffle version
 		
 3) Prepare the project folder.
 	1) New project folder:SmartToken
-		pi$ mkdir -p ~/Projects/SmartToken
+		mkdir -p ~/Projects/SmartToken
 		
 	2) Then, use Truffle to initiate your project: 
-		pi$ cd ~/Projects/SmartToken
-		pi$ truffle init
+		cd ~/Projects/SmartToken
+		truffle init
 		
 	3) Install Web3 module:
-		pi$ cd ~/Projects/SmartToken
-		pi$ npm install web3@0.20.1
+		cd ~/Projects/SmartToken
+		npm install web3@0.20.1
 	
 	4) Develop smart contract
 		refer to http://chainskills.com/2017/04/03/create-and-deploy-a-smart-contract-66/
 		
 	5) In general, test scripts are saved in ./test folder, you could execute test script like:
-		pi$ node ./test/wc3_test_token.js
+		node ./test/wc3_test_token.js
 
 ---------------------------------------------------------------------------------------------
 								Python Development-Web3
