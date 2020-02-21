@@ -18,12 +18,12 @@ B) Install Go language:
 	All golang package can be found on https://golang.org/dl/
 	First of all, download go package and extract to /usr/local
 	--- For Raspberry pi:
-		wget https://storage.googleapis.com/golang/go1.13.7.linux-armv6l.tar.gz
-		sudo tar -C /usr/local -xzf go1.13.7.linux-armv6l.tar.gz
+		wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
+		sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
 	
-	--- For Ubuntu
-		wget https://storage.googleapis.com/golang/go1.13.7.linux-amd64.tar.gz
-		sudo tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
+	--- For Ubuntu 16.04
+		wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.9.3.linux-amd64.tar.gz
 	
 	Add GOROOT and GOPATH env variables and append them to PATH
 	GOROOT: go_lang library and tools 
@@ -72,8 +72,8 @@ Method 2): Build from source code
 
 	C) Ether go-ethereum
 		cd go-ethereum
-	# We use v1.9.9 for our project, so check out version based on tag
-		git checkout v1.9.9
+	# We use v1.7.3 for our project, so check out version based on tag
+		git checkout v1.7.3
 
 	D) build geth. This will take several minutes to be done.
 		make geth
@@ -98,7 +98,7 @@ reference:http://chainskills.com/2017/04/10/raspberry-pi-and-ethereum-the-epilog
 ---------------------------------------------------------------------------------------------
 1) Prerequisite: make sure your Pi has node installed, if not, try install npm and node.js first.
 	Install node.js by executing:
-		curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -		
+		curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -		
 		sudo apt-get install nodejs
 
 	
