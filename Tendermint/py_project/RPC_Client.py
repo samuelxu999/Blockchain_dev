@@ -12,7 +12,9 @@ Created on Feb.9, 2020
 
 import requests
 import json
-from utilities import TypesUtil
+import time
+import os
+from utilities import TypesUtil,FileUtil
 
 class PRC_Client(object):
 
@@ -121,10 +123,13 @@ if __name__ == "__main__":
 
 	#==================== test tx commit ====================
 	tx_json = {}
+	tx_size = 128*1024
+	tx_value = TypesUtil.string_to_hex(os.urandom(tx_size))
 
 	if(kv_mode==0):
 		# ----------------- 1) value --------------
-		tx_data = "samuel" 
+		# tx_data = "samuel" 
+		tx_data = tx_value
 	else:
 		# ----------------- 2) key:value --------------
 		json_value={}
@@ -141,7 +146,11 @@ if __name__ == "__main__":
 	tx_json['tx']='"' + tx_data +'"' 
 	# print(tx_json)
 
+	start_time=time.time()
 	# ---------------- deliver tx --------------
 	test_tx_commit(tx_json)
+	exec_time=time.time()-start_time
+	print(format(exec_time*1000, '.3f'))
+	FileUtil.save_testlog('test_results', 'exec_time.log', format(exec_time*1000, '.3f'))
 
 	pass

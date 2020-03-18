@@ -119,3 +119,184 @@ class TypesUtil(object):
 	    	return hashlib.sha256(block_string).hexdigest()
 	    else:
 	    	return None
+
+'''
+FileUtil class for handling file data
+'''
+class FileUtil(object):
+
+	@staticmethod
+	def ReadLines(filepath):
+		'''
+		Function:read line contents from file
+		@arguments: 
+		(in)  filepath:   	input file path
+		(out) ls_lines:   	return line list object
+		'''
+		#define file handle to open select file
+		fname = open(filepath, 'r')    
+		#read text by line and saved as array list ls_lines
+		ls_lines=fname.readlines()
+		#close file
+		fname.close()
+		return ls_lines
+	
+	@staticmethod
+	def AddLine(filepath, linedata):
+		'''
+		Function: write line string to file
+		@arguments: 
+		(in)  filepath:   	input file path
+		(in)  linedata:   	line data for writing
+		'''
+		#define file handle to open select file for appending data
+		fname = open(filepath, 'a') 
+		
+		#write line data to file
+		fname.write("%s\n" %(linedata))
+		
+		#close file
+		fname.close()
+	
+	@staticmethod
+	def AddDataByLine(filepath, ls_data):
+		'''
+		Function: write list data to file by each line
+		@arguments: 
+		(in)  filepath:   	input file path
+		(in)  ls_data:   	list data for writing
+		'''
+		#define file handle to open select file for write data
+		fname = open(filepath, 'w') 
+		
+		#for each lines in data and write to file
+		for linedata in ls_data:
+			#write line data to file
+			fname.write("%s\n" %(linedata))
+		
+		#close file
+		fname.close()
+	
+	@staticmethod
+	def DeleteLine(filepath, str_target):
+		'''
+		Function: remove line containing target string from file
+		@arguments: 
+		(in)  filepath:   	input file path
+		(in)  str_target:   target string for delete
+		'''
+		#First, read all data from file
+		fname = open(filepath, 'r')   
+		ls_lines=fname.readlines()	
+		fname.close()	
+
+		#reopen file with 'w' option
+		fname = open(filepath, 'w')
+		
+		#for each line to rewrite all data except ls_data
+		for line in ls_lines:
+			if((str_target in line) or line=='\n'):
+				continue
+			#write line data to file
+			fname.write("%s" %(line))
+		#close file
+		fname.close()
+
+	@staticmethod
+	def UpdateLine(filepath, str_target, str_line):
+		'''
+		Function: update line containing target string in file
+		@arguments: 
+		(in)  filepath:   	input file path
+		(in)  str_target:   target string for delete
+		'''	
+		#First, read all data from file
+		fname = open(filepath, 'r')   
+		ls_lines=fname.readlines()	
+		fname.close()	
+
+		#reopen file with 'w' option
+		fname = open(filepath, 'w')
+		
+		#for each line to rewrite all data
+		for line in ls_lines:
+			if(str_target in line):
+				#write updated data to file
+				fname.write("%s" %(str_line))
+			else:
+				#write unchanged line to file
+				fname.write("%s" %(line))
+		#close file
+		fname.close()
+	
+	@staticmethod
+	def List_save(filepath, list_data):
+		"""
+		Save the list of nodes to file
+		"""
+		fname=open(filepath, 'wb') 
+		pickle.dump(list_data, fname)
+		fname.close()
+
+	@staticmethod
+	def List_load(filepath):
+		"""
+		Load list from file
+		"""
+		fname=open(filepath, 'rb') 
+		list_data = pickle.load(fname)
+		fname.close() 
+		return list_data
+	
+	@staticmethod
+	def JSON_save(filepath, json_data):
+		"""
+		Save the JSON data to file
+		"""
+		fname = open(filepath, 'w') 
+		#json_str = json.dumps(json_data)
+		json_str=TypesUtil.json_to_string(json_data)
+		fname.write("%s" %(json_str))
+		fname.close()
+		
+	@staticmethod
+	def JSON_load(filepath):
+		"""
+		Load JSON data from file
+		"""
+		fname = open(filepath, 'r') 
+		json_str=fname.read()
+		fname.close()
+		#json_data = json.loads(json_str)
+		json_data=TypesUtil.string_to_json(json_str)
+		return json_data
+		
+
+	@staticmethod
+	def list_files(dir_path="./", reg_str='*'):
+		'''
+		Function: list all files in dir_path directory based on reg_str condition
+		@arguments: 
+		(in)    dir_path:   directory path for file search. set current path as default directory
+		(in)    reg_str:   	input regex string to filter files, eg, *.log. list all files as default
+		(out)   ls_files:   	return listed files
+		'''
+		# save pwd for restore path
+		pwd = os.getcwd()
+		os.chdir(dir_path)
+		ls_files=[]
+		for file in glob.glob(reg_str):
+			ls_files.append(file)
+		
+		# restore original path
+		os.chdir(pwd)
+		return ls_files
+
+	@staticmethod
+	def save_testlog(test_dir, log_file, log_data):
+		#save new key files
+		#test_dir = 'test_results'
+		if(not os.path.exists(test_dir)):
+			os.makedirs(test_dir)
+		test_file = test_dir + '/' + log_file
+		FileUtil.AddLine(test_file, log_data)
