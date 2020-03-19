@@ -63,5 +63,25 @@
 	{
 		"address": "33c00c11ce470b53680e0fecf200492fcb852d86",
 		"ip": "128.226.76.62"
+	},
+	"Pi_Plus_Sam1": 
+	{
+		"address": "fd4161e9117ed588055651775414e716cdafba4e",
+		"ip": "128.226.79.249"
+	},
+	"Pi_Plus_Sam2": 
+	{
+		"address": "6348ad2308f0991aad8b029e2b5c10e28a7021f7",
+		"ip": "128.226.88.144"
+	},
+	"R2_Pi_Top": 
+	{
+		"address": "9a4e109627c43c991b6e90444a7e668cabd7af1a",
+		"ip": "128.226.76.114"
+	},
+	"R2_Pi_Bottom": 
+	{
+		"address": "2c18a134cd5023cabf1c37fdd60cb773cd36253d",
+		"ip": "128.226.78.148"
 	}
 }
