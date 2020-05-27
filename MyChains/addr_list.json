@@ -13,9 +13,12 @@
 	"rack1_PI_Plus_2": "0xea12421586661067abe5b8b7222f2bef79d69b8c",
 	"rack1_PI_Plus_3": "0xd4413b594fa05f39dc16f6277f51c76acef0281a",
 	"rack1_PI_Plus_4": "0x06884119651d0a77250fd6765d2c48316bc57042",
+	"Desk_PI_Node_1": "0xaa09c6d65908e54bf695748812c51d8f2ceea0f5",
+	"Desk_PI_Node_2": "0xfa4c5d320d638cbdff557c4c1f3110d3143f40c3",
 	"Desk_PI_Plus_Sam1": "0x8efe2a075edd9eb996ea203d232ee5c814a4e0cd",
 	"Desk_PI_Plus_Sam2": "0x1daff046e9942a8994e05f821fd81389600295bb",
 	"AuthToken": "0xfc4b99fbc12788d0a7fc75867b0f31cca7e2dd4a",
 	"IndexToken": "0x7329747773c78bc6236551ee4318a91bf77d9e36",
+	"HashModelToken": "0x761b8a58ec194f9c4d1630ab98da0420a50d30a0",
 	"CapACToken": "0x5446e90db8f1e5eceb01e618ebf48fa5ace7abde"
 }
