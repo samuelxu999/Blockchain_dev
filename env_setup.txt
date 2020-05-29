@@ -147,6 +147,6 @@ reference:http://web3py.readthedocs.io/en/stable/quickstart.html#environment
 		sudo python3.5 -m pip install setuptools --upgrade
 		
 2) Install Web3
-	sudo python3.5 -m pip install web3
+	sudo python3.5 -m pip install --upgrade web3==3.16.5
 
 			
