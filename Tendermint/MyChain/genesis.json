@@ -136,13 +136,31 @@
       "name": "node12"
     },
     {
+      "address": "07E51A74CC4CB6232A24999AABCD9A38807541FD",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "92+HFoUE7ORapZm4ALRmlj5p9S+ViuW6H0a5b7nvAyg="
+      },
+      "power": "1",
+      "name": "node13"
+    },
+    {
+      "address": "D710507FB7B17B62FFAFA9C8103FE2BB70454C9D",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "4+SWAdQChSYYec+uLdOvLCxxyVAIUmy34zpW9CzaXL8="
+      },
+      "power": "1",
+      "name": "node14"
+    },
+    {
       "address": "9AE0D1E0DEBE80AFE19232DB91759A7ECA5B9DF4",
       "pub_key": {
         "type": "tendermint/PubKeyEd25519",
         "value": "JM47YGrPcHM6kXAfzQuoHCv98N3l0qsWqme8sMR0sg4="
       },
       "power": "1",
-      "name": "node13"
+      "name": "node15"
     },
     {
       "address": "305BFBB5D5B0AF088FB5D1FD9ECE240BB83A6251",
@@ -151,7 +169,7 @@
         "value": "y3FQT66yRiBmFk64zA6HEyz3QOV5QVzu6FjsrZuAv0k="
       },
       "power": "1",
-      "name": "node14"
+      "name": "node16"
     },
     {
       "address": "7745C72030E79ED93ECCDA30BA8FF8A029C93693",
@@ -160,7 +178,7 @@
         "value": "KNhgWIX3w4MDnxoRcF2LjC/MKSvvSqofAfNTYfwhCrg="
       },
       "power": "1",
-      "name": "node15"
+      "name": "node17"
     },
     {
       "address": "4EAC40EFFADC5847ED16E0BCE6BBEAAD44C1D48D",
@@ -169,7 +187,25 @@
         "value": "LyZdIl8/1K516FGj+PjPFEgybCHoV+3ewIcNhoG8vbg="
       },
       "power": "1",
-      "name": "node16"
+      "name": "node18"
+    },
+    {
+      "address": "76FBFB9C9CB4B13D42D7B96BB20FFCF95FB6DC47",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "p/o8x5Y0vhZSVbFcgvZ34WAcXnQLNRAw7HJjlcWjFYQ="
+      },
+      "power": "1",
+      "name": "node19"
+    },
+    {
+      "address": "7BEFAA16635A414554F285A268BCC9C4A72E009E",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "fBrXiNZ+2h9SURmVJiRxjZmAD4iyiS+ZFy4/4G5gGNE="
+      },
+      "power": "1",
+      "name": "node20"
     }
   ],
   "app_hash": ""

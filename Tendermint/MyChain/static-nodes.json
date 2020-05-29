@@ -1,87 +1,128 @@
 {
 	"sam_ubuntu18_redbarn": 
 	{
+		"name": "node0",
 		"address": "87ab784fb6e8d448d03340aeb02ff0ee4b2996dc",
 		"ip": "128.226.88.250"
 	},
 	"Pi4_R1_1": 
 	{
+		"name": "node1",
 		"address": "515abc266fc331897c5993d3be3c2c549bcce54b",
 		"ip": "128.226.77.157"
 	},
 	"Pi4_R1_2": 
 	{
+		"name": "node2",
 		"address": "14583fee32f315bf6344a3394690586a060f1034",
 		"ip": "128.226.78.128"
 	},
 	"Pi4_R1_3": 
 	{
+		"name": "node3",
 		"address": "9ce231c713ea7f9b0e3a193c5dbf08be2f0f0b68",
 		"ip": "128.226.88.155"
 	},
 	"Pi4_R1_4": 
 	{
+		"name": "node4",
 		"address": "4db2fe714d7321bbd51fb56a1c4ec70ae1d8f3b2",
 		"ip": "128.226.79.31"
 	},
 	"Pi4_R2_1": 
 	{
+		"name": "node5",
 		"address": "ccda7f58a3c11a285f3877b1f9b8defcaa9ad5d5",
 		"ip": "128.226.78.195"
 	},
 	"Pi4_R2_2": 
 	{
+		"name": "node6",
 		"address": "9bef9b26b4f13464a96dcc78ae19ffcc4104536c",
 		"ip": "128.226.77.222"
 	},
 	"Pi4_R2_3": 
 	{
+		"name": "node7",
 		"address": "39f4a273eb931d9133514098a37eb2f5b1a834fb",
 		"ip": "128.226.88.120"
 	},
 	"Pi4_R2_4": 
 	{
+		"name": "node8",
 		"address": "0f2f890c5304b4aae5cc3621486e9d6a76dfc76b",
 		"ip": "128.226.77.111"
 	},
 	"Pi_Plus_1": 
 	{
+		"name": "node9",
 		"address": "66976238d3b189b5cf214a571c448b2c29b6c4a1",
 		"ip": "128.226.79.137"
 	},
 	"Pi_Plus_2": 
 	{
+		"name": "node10",
 		"address": "3eb54b4abaf702496fdc845d372c7d0f1b212752",
 		"ip": "128.226.79.251"
 	},
 	"Pi_Plus_3": 
 	{
+		"name": "node11",
 		"address": "0eb25697115aecb651113ff066eee0654b5162a7",
 		"ip": "128.226.88.37"
 	},
 	"Pi_Plus_4": 
 	{
+		"name": "node12",
 		"address": "33c00c11ce470b53680e0fecf200492fcb852d86",
 		"ip": "128.226.76.62"
 	},
+	"Pi_Node_1": 
+	{
+		"name": "node13",
+		"address": "7315aa753a02d92ecae7348bb12521d0cdef55ac",
+		"ip": "128.226.79.127"
+	},
+	"Pi_Node_2": 
+	{
+		"name": "node14",
+		"address": "7358a7761318f0eb3534fe5fc9c0b609040c4b3f",
+		"ip": "128.226.78.89"
+	},
 	"Pi_Plus_Sam1": 
 	{
+		"name": "node15",
 		"address": "fd4161e9117ed588055651775414e716cdafba4e",
 		"ip": "128.226.79.249"
 	},
 	"Pi_Plus_Sam2": 
 	{
+		"name": "node16",
 		"address": "6348ad2308f0991aad8b029e2b5c10e28a7021f7",
 		"ip": "128.226.88.144"
 	},
 	"R2_Pi_Top": 
 	{
+		"name": "node17",
 		"address": "9a4e109627c43c991b6e90444a7e668cabd7af1a",
 		"ip": "128.226.76.114"
 	},
 	"R2_Pi_Bottom": 
 	{
+		"name": "node18",
 		"address": "2c18a134cd5023cabf1c37fdd60cb773cd36253d",
 		"ip": "128.226.78.148"
+	},
+	"R2_Tb_Top": 
+	{
+		"name": "node19",
+		"address": "c5ba407d7bbb4f2a39edaeaf8325791a481adcd4",
+		"ip": "128.226.78.181"
+	},
+	"R2_Tb_Bottom": 
+	{
+		"name": "node20",
+		"address": "a3456ec474df2e8e0f5e7f049f447cbc9c9942c0",
+		"ip": "128.226.76.129"
 	}
 }
