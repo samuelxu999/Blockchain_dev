@@ -1,0 +1,120 @@
+================ Swarm development environment setup on Linux =======================
+
+---------------------------------------------------------------------------------------------
+								Prerequisite and Dependencies
+---------------------------------------------------------------------------------------------
+A) As a first thing we start by updating our software
+	sudo apt-get update	
+
+B) Python Prerequisite
+	Basic:
+		sudo apt-get install python-pip python-dev build-essential
+		sudo apt-get install python-setuptools 
+		sudo python -m pip install pip --upgrade
+		sudo python -m pip install setuptools --upgrade
+	
+	python3.X:
+		sudo apt-get install python3-pip python3-dev python3-setuptools
+		sudo python3 -m pip install pip --upgrade
+		sudo python3 -m pip install setuptools --upgrade
+
+C) Other tools:
+	jq used for handle json data
+		sudo apt-get install jq
+	
+------------------------------------------------------------------------------------------
+                   					Go Installation
+------------------------------------------------------------------------------------------
+	Not suggest use: `sudo apt-get install golang` to install golang
+	All golang package can be found on https://golang.org/dl/
+	First of all, download go package and extract to /usr/local
+	--- For Raspberry pi:
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-armv6l.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-armv6l.tar.gz
+	
+	--- For Ubuntu
+		wget https://storage.googleapis.com/golang/go1.13.7.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
+	
+	Add GOROOT and GOPATH env variables and append them to PATH
+	GOROOT: go_lang library and tools 
+	GOGOPATH: go application work directory 
+	1) open ~/.bashrc file
+		pico ~/.bashrc
+
+	2) Append following to end of file
+		export GOROOT=/usr/local/go
+		export PATH=$PATH:$GOROOT/bin	
+		export GOPATH=$HOME/Desktop/Github/Blockchain_dev/dev_sdk/go_proj
+		export PATH=$PATH:$GOPATH/bin
+
+	3) activate env
+		source ~/.bashrc
+	
+---------------------------------------------------------------------------------------------
+	Test Installation
+		go version
+		pip -V
+		git --version
+---------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------
+								Ethereum Installation
+---------------------------------------------------------------------------------------------
+For ethereum setup, please refer to: https://github.com/samuelxu999/Blockchain_dev/blob/master/env_setup.txt
+
+
+---------------------------------------------------------------------------------------------
+								Swarm Installation
+---------------------------------------------------------------------------------------------
+The following instruction introduce How to install Swarm node on Linux OS, 
+like Raspberry Pi 3 and Ununtu.
+Reference: https://swarm-guide.readthedocs.io/en/latest/node_operator.html
+
+
+Method 1): Build from source code
+	A) As a first thing we start by updating our software
+		sudo apt-get update
+	
+	B) Get Source Code
+		mkdir -p $GOPATH/src/github.com/ethereum		
+		cd $GOPATH/src/github.com/ethereum
+		git clone https://github.com/ethersphere/swarm
+		cd swarm
+		
+	C) Compile & Install
+		make swarm
+
+	D) Add swarm to $PATH
+		1) open ~/.bashrc file
+			pico ~/.bashrc	
+				
+		2) append following to end of file
+			export GOSWARM=$GOPATH/src/github.com/ethereum/swarm/build
+			export PATH=$PATH:$GOSWARM/bin
+		
+	E) Test swarm
+		swarm version
+
+
+---------------------------------------------------------------------------------------------
+								Python Development Toolkits
+---------------------------------------------------------------------------------------------	
+1) Prerequisite
+	Basic:
+		sudo apt-get install python-pip python-dev build-essential
+		sudo apt-get install python-setuptools 
+	
+	python3.X:
+		sudo apt-get install python3-pip python3-dev python3-setuptools
+		sudo python3.X -m pip install pip --upgrade
+		sudo python3.X -m pip install setuptools --upgrade
+	
+2) (Optional) Install PycURL: http://pycurl.io/docs/latest/install.html
+	sudo apt install libcurl4-gnutls-dev
+	sudo apt install python-pycurl
+	sudo apt install python3-pycurl
+
+	
+
+			
