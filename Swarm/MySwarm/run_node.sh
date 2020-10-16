@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# node directory path
+# parse parameters
 Node_Dir=$1
 Account_addr=$2
 bzz_Port=$3

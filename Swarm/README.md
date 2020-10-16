@@ -10,9 +10,10 @@ The private swarm network configuration folder, including:
 
 |   source   | Description |
 |:----------:|-------------|
-| init_node.sh | node initialization script to initialize node folder |
-| run_node.sh | This script is used to test netowork by using python ABCI app. |
-| static-nodes.json | record all peers information for private tendermint network. |
+| init_account.sh | node account initialization script to create eth account |
+| run_node.sh | This script is used to a start swarm node with configuration. |
+| add_peer.sh | This script is used to a start swarm node with configuration. |
+| static-nodes.json | record all peers enode information for private network. |
 
 	
 ## py_project

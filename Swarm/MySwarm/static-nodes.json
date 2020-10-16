@@ -1,0 +1,14 @@
+{
+	"sam_ubuntu18_redbarn": 
+	{
+		"name": "node1",
+		"enode": "enode://c22925572b506ae8908b5e52facfaf853eb88730851d894aa24bb35a821f824cc537e560b712a8b579fe0d93f235a29a9dd2f02643b210dd6419cc3ac5bc465b@128.226.88.250:30399",
+		"ip": "128.226.88.250"
+	},
+	"sam_Dell7071": 
+	{
+		"name": "node2",
+		"enode": "enode://9ca6bc2d1b34196ed55c56fee57b9304ce8eb8c323c99f98712ab17845e11d36c91e4d646778b7c3f85ca73141956e30d2ac1b1c1ccbbbf5d7e4285670bc56d9@128.226.88.210:30399",
+		"ip": "128.226.88.210"
+	}
+}
