@@ -8,7 +8,6 @@ Created on Nov.4, 2020
 @author: Xu Ronghua
 @Email:  rxu22@binghamton.edu
 @TaskDescription: This module provide encapsulation of RPC-JSON API that access to local Swarm node.
-@Install  pycurl packages: pip install pycurl
 @Reference: https://swarm-guide.readthedocs.io/en/latest/dapp_developer/index.html
 '''
 
