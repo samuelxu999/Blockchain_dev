@@ -15,21 +15,23 @@ The private swarm network configuration folder, including:
 | add_peer.sh | This script is used to peer swarm nodes in static-nodes.json. |
 | static-nodes.json | record all static peering enode information for private swarm test network. |
 
-To run swarm node, you need to initialize a local node directory, like node1, and execute init_account.sh:
+1) To run swarm node, you need to initialize a local node directory, like node1, and execute init_account.sh:
 
-$ ./init_account.sh
+	$ ./init_account.sh
 
 After init_account.sh finished, a node1 wull be generated as well as an ethereum account in ./node1/keystore
 
-If you have local node directory with an ethereum account, execute following scripts to run a swarm node:
+2) If you have local node directory with an ethereum account, directly execute run_node.sh to run a swarm node:
 
-$ ./run_node.sh node1 @account_address
+	$ ./run_node.sh node1 @account_address
 
 The @account_addressn is ethereum account, like af53c65828ed52b370f6ecc5ccb6059cfba4b456.
 
-$ ./add_peer.sh node1
+3) As we work on private swarm test network, and the auto discovery is disabled. You need execute add_peer.sh will add static peering nodes for current running swarm instance. 
 
-Execute add_peer.sh will add peeriog nodes for current swarm instance. You need run this multiple if some nodes run with error in peering process.
+	$ ./add_peer.sh node1
+
+You need run this multiple if some nodes run with error in peering process.
 
 	
 ## py_project
