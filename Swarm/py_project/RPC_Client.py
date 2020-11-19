@@ -16,7 +16,7 @@ import json
 import time
 import os
 import pycurl
-from io import BytesIO 
+from io import BytesIO
 from utilities import TypesUtil,FileUtil
 
 class PRC_Client(object):
@@ -91,9 +91,80 @@ class PRC_Client(object):
 		# Decode the bytes stored in get_body and return the result 
 		return get_body.decode('utf8')
 
+	'''
+	This can save a file on swarm
+	Execute curl -F "data=@path/to/local/file;type=text/plain" http://localhost:8500/bzz:/
+	Return: Swarm hash of the address string of root directory of your file inside Swarm.
+	'''
+	@staticmethod
+	def upload_file(file_name): 
 
-if __name__ == "__main__":
+		body_buffer = BytesIO(''.encode('utf-8')) 
+		crl = pycurl.Curl()
 
+		# crl.setopt(crl.HTTPHEADER, ['Content-Type: text/plain'])
+
+		# Set URL value
+		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/')
+
+		crl.setopt(crl.POST, 1)
+
+		crl.setopt(crl.HTTPPOST, [('data', (crl.FORM_FILE, file_name)), ('type', 'text/plain')])
+
+		# Write response data into body_buffer
+		crl.setopt(crl.WRITEDATA, body_buffer)
+
+		# Perform a file transfer 
+		crl.perform() 
+
+		# End curl session
+		crl.close()
+
+		# Get the content stored in the BytesIO object (in byte characters) 
+		get_body = body_buffer.getvalue()
+
+		# Decode the bytes stored in get_body and return the result 
+		swarm_hash = get_body.decode('utf8')
+
+		return swarm_hash
+
+	'''
+	To download a string content from Swarm, you just need the string’s Swarm hash. 
+	curl http://localhost:8500/bzz:/@hash/file
+	'''
+	@staticmethod
+	def download_file(swarm_hash, file_name, download_file='download_data'): 
+
+		# data_buffer used to save response information
+		data_buffer = BytesIO() 
+		crl = pycurl.Curl()
+
+		# Set URL value
+		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/'+swarm_hash+'/'+file_name)
+
+		# Write bytes that are utf-8 encoded
+		crl.setopt(crl.WRITEDATA, data_buffer)
+
+		# Perform a file transfer 
+		crl.perform() 
+
+		# End curl session
+		crl.close()
+
+		# Get the content stored in the BytesIO object (in byte characters) 
+		get_body = data_buffer.getvalue()
+
+		# new a file handle to save download_file
+		file_handle=open(download_file, 'wb')
+
+		# save content to file_handle
+		file_handle.write(get_body)
+
+		# close file handle
+		file_handle.close()
+
+
+def string_test():
 	#==================== test upload string =========================
 	tx_json = {}
 	# tx_size = 128*1024
@@ -125,5 +196,25 @@ if __name__ == "__main__":
 
 	query_ret = PRC_Client.download_string(swarm_hash)
 	print(query_ret)
+
+
+def file_test():
+	#==================== test upload file =========================
+	file_name = "test_data.txt"
+	post_ret = PRC_Client.upload_file(file_name)
+	print(post_ret)
+
+	#==================== test download file =========================
+	# swarm_hash = '683b0a7918fbad1763fe0baccf7df1ef0fffc342c1b12abdecf57c009135eeb2'
+	swarm_hash = post_ret
+
+	PRC_Client.download_file(swarm_hash, file_name)
+
+
+if __name__ == "__main__":
+
+	string_test()
+
+	file_test()
 
 	pass
