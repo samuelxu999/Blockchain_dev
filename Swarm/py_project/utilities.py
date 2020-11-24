@@ -300,3 +300,48 @@ class FileUtil(object):
 			os.makedirs(test_dir)
 		test_file = test_dir + '/' + log_file
 		FileUtil.AddLine(test_file, log_data)
+
+'''
+DatetimeUtil class for format handle between datatime and string
+'''
+class DatetimeUtil(object):
+	#switch int timestamp to datatime object
+	@staticmethod
+	def timestamp_datetime(_timestamp):
+		obj_datetime=datetime.fromtimestamp(_timestamp/1e3)
+		return obj_datetime
+
+	#switch datatime object to int timestamp
+	@staticmethod
+	def datetime_timestamp(_datetime):
+		int_datetime=int(_datetime.timestamp() * 1e3)
+		return int_datetime
+
+	#switch datatime object to format string
+	@staticmethod
+	def datetime_string(_datetime, _format="%Y-%m-%d %H:%M:%S"):
+		str_datetime=_datetime.strftime(_format)
+		return str_datetime
+		
+	#switch format string to datatime object
+	@staticmethod
+	def string_datetime(_strtime, _format="%Y-%m-%d %H:%M:%S"):
+		_datetime=datetime.strptime(_strtime, _format)
+		return _datetime
+		
+	#get datatime duration from format input
+	@staticmethod
+	def datetime_duration(_weeks=0,_days=0,_hours=0,_minutes=0):
+		_duration=timedelta(weeks=_weeks,days=_days,hours=_hours,minutes=_minutes)
+		return _duration
+		
+	#check whether input datatime has expired
+	@staticmethod
+	def IsExpired(str_datatime):
+		time1=DatetimeUtil.string_datetime(str_datatime)
+		time2=datetime.now()
+		diff = (time1-time2).total_seconds()
+		if(diff>0):
+			return False
+		else:
+			return True
