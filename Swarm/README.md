@@ -40,7 +40,21 @@ The Python development project including:
 |   source   | Description |
 |:----------:|-------------|
 | RPC_Client.py | python RPC wrapper of curl commandlines for interacting with local swarm node |
+| Swarm_Client.py | Works as demo client app to interact with swarm RPC server. |
+| Swarm_Server.py | Runs as swarm RPC server node which provides RESTfull webservice APIs for client. |
 | utilities.py | utils library to support projects. |
+
+1) To run swarm RPC server, you need to execute `Swarm_Server.py` by python3.X with required parameters:
+
+	$ python3.X Swarm_Server.py -p 8055 --debug --threaded
+
+You can execute `python3.X Swarm_Server.py -h` to learn parameters usage.
+
+2) After a swarm RPC server has been launched, execute `Swarm_Client.py` to interact with server side.
+
+	$ python3.X Swarm_Client.py --target_addres 128.226.88.210:8501 --test_fun 0 --kv_mode 0
+
+You can execute `python3.X Swarm_Client.py -h` to learn parameters usage.
 
 ## Environment Setup	
 The environement configuration includs: Prerequisite, Swarm development setup and Dapp development toolkit. Refer to env_setup.txt for detail.
