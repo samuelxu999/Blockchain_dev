@@ -19,7 +19,7 @@ import pycurl
 from io import BytesIO
 from utilities import TypesUtil,FileUtil
 
-class PRC_Curl(object):
+class RPC_Curl(object):
 
 	'''
 	This can save a string data on swarm
@@ -33,7 +33,7 @@ class PRC_Curl(object):
 		data = json_data['data']
 
 		# set body buffer to save response information
-		body_buffer = BytesIO(data.encode('utf-8')) 
+		body_buffer = BytesIO() 
 
 		crl = pycurl.Curl()
 
@@ -195,7 +195,7 @@ def string_test():
 	
 	tx_json['data']=tx_data
 
-	post_ret = PRC_Curl.upload_string(tx_json)
+	post_ret = RPC_Curl.upload_string(tx_json)
 	print(post_ret)
 
 	#==================== test download string =========================
@@ -205,21 +205,21 @@ def string_test():
 	# swarm_hash = '4c9293963f4c1e9b7cd3e9e3a45d41ec8a961278be2701ce071317d4832d3bca'
 	swarm_hash = post_ret['results']
 
-	query_ret = PRC_Curl.download_string(swarm_hash)
+	query_ret = RPC_Curl.download_string(swarm_hash)
 	print(query_ret)
 
 
 def file_test():
 	#==================== test upload file =========================
 	file_name = "test_data.txt"
-	post_ret = PRC_Curl.upload_file(file_name)
+	post_ret = RPC_Curl.upload_file(file_name)
 	print(post_ret)
 
 	#==================== test download file =========================
 	# swarm_hash = '683b0a7918fbad1763fe0baccf7df1ef0fffc342c1b12abdecf57c009135eeb1'
 	swarm_hash = post_ret['results']
 
-	query_ret = PRC_Curl.download_file(swarm_hash, file_name)
+	query_ret = RPC_Curl.download_file(swarm_hash, file_name)
 	if(query_ret['status']==200):
 		# new a file handle to save download_file
 		file_handle=open(query_ret['download_file'], 'wb')

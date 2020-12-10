@@ -19,7 +19,7 @@ from flask import abort,make_response,request
 from argparse import ArgumentParser
 
 from utilities import FileUtil, TypesUtil
-from RPC_Client import PRC_Curl
+from RPC_Client import RPC_Curl
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ def download_data():
 
 	# -------------- call curl API to query data ------------------
 	swarm_hash = tx_json['hash']
-	query_ret = PRC_Curl.download_string(swarm_hash)
+	query_ret = RPC_Curl.download_string(swarm_hash)
 
 	response = {}
 	# build response given get result
@@ -63,7 +63,7 @@ def upload_data():
 		abort(401, {'error': 'No parameter data'})
 
 	# -------------- call curl API to send data ------------------
-	post_ret = PRC_Curl.upload_string(tx_json)
+	post_ret = RPC_Curl.upload_string(tx_json)
 	
 	response = {}
 	# build response given post result
@@ -88,7 +88,7 @@ def download_file():
 	swarm_hash = tx_json['hash']
 	file_name = tx_json['file_name']
 	download_file = tx_json['download_file']
-	query_ret = PRC_Curl.download_file(swarm_hash, file_name, download_file)
+	query_ret = RPC_Curl.download_file(swarm_hash, file_name, download_file)
 
 	response = {}
 	# build response given query result
@@ -113,7 +113,7 @@ def upload_file():
 	uploaded_file.save(file_name)
 
 	# # -------------- call curl API to upload file to swarm net ------------------
-	post_ret = PRC_Curl.upload_file(file_name)
+	post_ret = RPC_Curl.upload_file(file_name)
 
 	# remove local uploaded file
 	os.remove(file_name)
