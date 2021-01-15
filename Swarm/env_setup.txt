@@ -27,7 +27,11 @@ C) Other tools:
 ------------------------------------------------------------------------------------------
 	Not suggest use: `sudo apt-get install golang` to install golang
 	All golang package can be found on https://golang.org/dl/
-	First of all, download go package and extract to /usr/local
+	
+	First of all, make sure remove old go version
+		sudo rm -rf /usr/local/go
+
+	Then, download go package and extract to /usr/local
 	--- For Raspberry pi:
 		wget https://storage.googleapis.com/golang/go1.13.7.linux-armv6l.tar.gz
 		sudo tar -C /usr/local -xzf go1.13.7.linux-armv6l.tar.gz
@@ -114,7 +118,4 @@ Method 1): Build from source code
 	sudo apt install libcurl4-gnutls-dev
 	sudo apt install python-pycurl
 	sudo apt install python3-pycurl
-
-	
-
 			
