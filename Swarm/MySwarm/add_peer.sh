@@ -1,9 +1,5 @@
 #!/bin/bash
 
-## export geth path to support remote script execution
-export GOETHEREUM=~/Desktop/Github/Blockchain_dev/dev_sdk/go-ethereum/build
-export PATH=$PATH:$GOETHEREUM/bin
-
 # parse parameters
 Node_Dir=$1
 

@@ -4,7 +4,8 @@
 command_line=$1
 
 if [ "$command_line" == "" ]; then
-	command_line="hostname"
+	# using default cmd.
+	command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/MySwarm;. ~/.profile;./add_peer.sh node1"
 fi
 
 # for iterate json to extract peering information
