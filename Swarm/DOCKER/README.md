@@ -66,6 +66,10 @@ Execute './service_run.sh stop --container_name' can stop running container
 
 Execute './service_run.sh show --container_name' can list all running container. Similiar to 'docker ps'.
 
+## swarm_nodes.sh
+
+Run './swarm_nodes.sh' to learn usage. This script can be used to manage swarm_node containers deployed on host machines.
+
 ## requirements.txt
 
 this is used to install python packages in Dockerfile.
