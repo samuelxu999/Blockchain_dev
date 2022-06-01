@@ -19,5 +19,26 @@
 		"enode": "enode://2d653130be8b1f618cd137abcdc1df47906f4ca5258e733c21f15f8ceb4d24f5d6b079b1169827665550bf7741756c6205983f8915083d0570242cc56f69d66f@128.226.88.247:30399",
 		"ip": "128.226.88.247",
 		"user": "samuel"
+	},
+	"samuel-OptiPlex-760": 
+	{
+		"name": "node4",
+		"enode": "enode://4d0e83fb921eaa08acc9426fc05c981d2bbceeaa877f33a89f3def7708a1d7b115cf04e5ecb048cef54dae5ad8a7347d2ae55bf6264a24641c7987aea34f1a22@128.226.77.51:30399",
+		"ip": "128.226.77.51",
+		"user": "samuel"
+	},
+	"ussc2104-lab3": 
+	{
+		"name": "node5",
+		"enode": "enode://a7d288e69354646f4d81f75d58cb8525f7eae3ad9ef6f252a89cbac28bc300060c1ae4f2c1e6a699105d20e78d2172ed7ce9e321497e42c54a99adbb820c1ff4@128.226.78.46:30399",
+		"ip": "128.226.78.46",
+		"user": "samuel"
+	},
+	"ussc2104-lab4": 
+	{
+		"name": "node6",
+		"enode": "enode://c75ec985d53d936d794ef3429abcbb773bd6f01d3a54ddbd38591897d08943ef151269837631b725644fb66cda04892b4eb422880d65f751736ed724f926e816@128.226.88.97:30399",
+		"ip": "128.226.88.97",
+		"user": "samuel"
 	}
 }
