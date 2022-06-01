@@ -1,23 +1,23 @@
 {
-	"local2": 
+	"Samuel-redbarn": 
 	{
-		"name": "node2",
-		"enode": "enode://ab3e787a0ae09e85d4b2c0692030dd80b9a7150a5c1881f0ccbe9259ad96ea46ec384bcea714919f637404da80098e7489b257a52e694c17a42a584cf3c8d428@0.0.0.0:32399",
+		"name": "node1",
+		"enode": "enode://ddf6ef751f0ff655f7c9a4885dad19273adc739a21767980c3114624f9766cb216f8e1f610c1272a18515831d48a43035acc74bf2451b0dc15f21a8516f22062@128.226.88.250:30399",
 		"ip": "128.226.88.250",
 		"user": "samuel"
 	},
-	"local3": 
+	"samuel-OptiPlex-7010": 
 	{
-		"name": "node3",
-		"enode": "enode://a55e03bc7966757b36855b69edfc871bbc9db01cc23d9866d1d297666f915967ea3e9fc2382dfb02b5dd258a4c65d36cbc7a0fd0638876261bb90ece8e13d0f9@0.0.0.0:33399",
+		"name": "node2",
+		"enode": "enode://39d271b20aefdca43ebd4883fef2528e2144134d59e37d3dc8e681440c083cd50555d5d730b2477fe2af55b051c96ccc345751627fcf4911562050d7726aa5d2@128.226.88.210:30399",
 		"ip": "128.226.88.210",
 		"user": "samuel"
 	},
-	"local4": 
+	"hs-System-Product-Name": 
 	{
-		"name": "node4",
-		"enode": "enode://9de9bf52883bf0df7481c7337dd931244dd73ee2f6d7cae7c04b0cec9b688d69efb4b262a718cc22b5be1575c8af385431787adb070cd980a72766b71c0cd8fd@0.0.0.0:34399",
-		"ip": "128.226.77.51",
+		"name": "node3",
+		"enode": "enode://2d653130be8b1f618cd137abcdc1df47906f4ca5258e733c21f15f8ceb4d24f5d6b079b1169827665550bf7741756c6205983f8915083d0570242cc56f69d66f@128.226.88.247:30399",
+		"ip": "128.226.88.247",
 		"user": "samuel"
 	}
 }
