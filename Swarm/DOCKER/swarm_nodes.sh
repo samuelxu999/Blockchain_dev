@@ -7,25 +7,25 @@ command_line=$2
 ## Start swarm_node containers
 if  [ "start" == "$operation" ]; then
 	echo "Start swarm_node!"
-	command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/DOCKER;./service_run.sh start swarm-node 30399 8500 8580"
+	command_line="cd $SWARMNODE;./service_run.sh start swarm-node 30399 8500 8580"
 ## Stop swarm_node containers
 elif [ "stop" == "$operation" ]; then
 	echo "Stop running swarm_node!"
-	command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/DOCKER;./service_run.sh stop"
+	command_line="cd $SWARMNODE;./service_run.sh stop"
 ## Peer swarm_node containers
 elif [ "peer" == "$operation" ]; then
 	echo "Peer swarm_node!"
-	command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/DOCKER;. ~/.profile;./peer_node.sh"
+	command_line="cd $SWARMNODE;. ~/.profile;./peer_node.sh"
 ## Update swarm_node image
 elif [ "update" == "$operation" ]; then
 	echo "Update swarm_node image!"
-	command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/DOCKER;git pull origin"
+	command_line="cd $SWARMNODE;git pull origin"
 ## execute remote test command
 elif [ "test" == "$operation" ]; then
 	echo "Execute remote test command!"
 	if [ "$command_line" == "" ]; then
 		# using default cmd.
-		command_line="cd ~/Desktop/Github/Blockchain_dev/Swarm/DOCKER;pwd"
+		command_line="echo $SWARMNODE"
 	fi
 ## show usage
 else

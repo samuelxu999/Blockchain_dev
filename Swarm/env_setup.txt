@@ -69,7 +69,7 @@ For ethereum setup, please refer to: https://github.com/samuelxu999/Blockchain_d
 
 
 ---------------------------------------------------------------------------------------------
-								Swarm Installation
+								Swarm Installation (Go)
 ---------------------------------------------------------------------------------------------
 The following instruction introduce How to install Swarm node on Linux OS, 
 like Raspberry Pi 3 and Ununtu.
@@ -99,6 +99,30 @@ Method 1): Build from source code
 		
 	E) Test swarm
 		swarm version
+
+---------------------------------------------------------------------------------------------
+								Swarm node Installation (Docker)
+---------------------------------------------------------------------------------------------
+The following instruction introduce how to install swarm node from docker image.
+
+	A) download or clone swarm docker project
+		clone https://github.com/samuelxu999/Blockchain_dev.git
+		cd $PWD/Blockchain_dev/Swarm/DOCKER
+	
+	B) add docker swarm node path to ~/.bashrc file
+		1) use 'pwd' to check current path, eg. /home/samuel/Desktop/Github/Blockchain_dev/Swarm/DOCKER
+
+		2) open ~/.bashrc file
+			pico ~/.bashrc	
+
+		3) append following to end of file
+			export SWARMNODE=/home/samuel/Desktop/Github/Blockchain_dev/Swarm/DOCKER
+
+	C) activate env
+		source ~/.bashrc
+
+	D) Check SWARMNODE
+		echo $SWARMNODE
 
 
 ---------------------------------------------------------------------------------------------
