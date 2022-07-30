@@ -3,18 +3,28 @@ The private ethereum network on single host machine, including:
 
 ### miner1
 miner1 configuration and startup scripts on Ubuntu OS or mac. 
+
 --- startminer1.sh: start up ethereum client as miner1, ipc-8042, port-30303.
+
 --- node_data:
-	--- genesis.json: genesis data for private blockchain network initialization.
-	--- password.sec: default password for miner's account.
-	--- static-nodes.json: paired static nodes information for miner1 on private entereum network.
+
+    --- genesis.json: genesis data for private blockchain network initialization.
+
+    --- password.sec: default password for miner's account.
+
+    --- static-nodes.json: paired static nodes information for miner1 on private entereum network.
 
 ### miner2
 miner2 configuration and startup scripts on OS or mac. 
+
 --- startminer2.sh: start up ethereum client as miner2, pc-8043, port-30304.
+
 --- node_data:
+
 	--- genesis.json: genesis data for private blockchain network initialization.
+
 	--- password.sec: default password for miner's account.
+
 	--- static-nodes.json: paired static nodes information for miner2 on private entereum network.
 
 ### Launch miners
