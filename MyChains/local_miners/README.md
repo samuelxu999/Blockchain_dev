@@ -31,11 +31,17 @@ Attach miner2 console: geth attach miner2/account/geth.ipc
 After attach console, run following commands to get information:
 
 > eth.accounts									(list all accounts)
+
 > admin.nodeInfo.enode							(show enode data)
+
 > admin.peers									(Show peers information)
+
 > miner.start(1)								(Using 1 code to mine blocks)
+
 > miner.stop()									(Stop mining blocks)
+
 > web3.fromWei(eth.getBalance(eth.coinbase))	(Display mined ether coins)
+
 > eth.blockNumber								(Show total blocks)
 
 Transfer coins between accounts:
