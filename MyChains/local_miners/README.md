@@ -23,9 +23,9 @@ Startup miner1: open a new terminal, then execute `cd miner1; ./startnode.sh`
 Startup miner2: open a new terminal, then execute `cd miner2; ./startnode.sh`
 
 ### Attach to console
-Attach miner1 console: geth attach miner1/account/geth.ipc
+Attach miner1 console: `geth attach miner1/account/geth.ipc`
 
-Attach miner2 console: geth attach miner2/account/geth.ipc
+Attach miner2 console: `geth attach miner2/account/geth.ipc`
 
 ### get enode or peer information
 After attach console, run following commands to get information:
