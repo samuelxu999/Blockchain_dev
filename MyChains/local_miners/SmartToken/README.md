@@ -5,9 +5,18 @@ This project demonstrates a basic smart contract use case. It comes with a sampl
 Try running some of the following tasks:
 
 ```shell
-node install								// install dependencies
-truffle compile								// compile contracts
-truffle migrate --reset						// deploy contracts on local network
-truffle test								// execute unit test cases
-node scripts/token_demo.js 1 node1_0		// execute demo test cases
+// install dependencies
+npm install
+
+// compile contracts
+truffle compile	
+
+// deploy contracts on local network (enable networks->development in truffle-config.js)
+truffle migrate --reset
+
+// execute unit test cases (disable networks->development in truffle-config.js)
+truffle test
+
+// execute demo test cases (ensure local miners are running and enable networks->development in truffle-config.js)
+node scripts/token_demo.js 1 node1_0
 ```
