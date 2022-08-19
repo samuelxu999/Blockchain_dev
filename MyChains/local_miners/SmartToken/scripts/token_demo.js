@@ -7,10 +7,10 @@ var Web3 = require('web3');
 var web3 = new Web3();
 
 // connect to the local node
-web3.setProvider(new web3.providers.HttpProvider('http://127.0.0.1:8042'));
+web3.setProvider(new web3.providers.HttpProvider(getAddress('HttpProvider')));
 
 // The contract that we are going to interact with
-var contractAddress = '0x9a9977070eBfc13f6AA5CEf755268BB08BBb604d';
+var contractAddress = getAddress('SmartToken');
 
 // Load config data from SmartToken.json
 var config = require('../build/contracts/SmartToken.json');
