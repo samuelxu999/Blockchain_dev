@@ -6,13 +6,6 @@
 		"ip": "128.226.88.250",
 		"user": "samuel"
 	},
-	"samuel-OptiPlex-7010": 
-	{
-		"name": "node2",
-		"enode": "enode://39d271b20aefdca43ebd4883fef2528e2144134d59e37d3dc8e681440c083cd50555d5d730b2477fe2af55b051c96ccc345751627fcf4911562050d7726aa5d2@128.226.88.210:30399",
-		"ip": "128.226.88.210",
-		"user": "samuel"
-	},
 	"hs-System-Product-Name": 
 	{
 		"name": "node3",
