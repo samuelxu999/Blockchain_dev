@@ -11,7 +11,7 @@ RUN apt-get update && \
 		build-essential libssl-dev libffi-dev \
 		libxml2-dev libxslt1-dev libjpeg-dev zlib1g-dev \
 		python3 python-dev python3-dev \
-		python-pip \
+		python3-pip \
         cmake \
         git \
         wget \
@@ -137,7 +137,7 @@ RUN chown -R docker:docker ${HOME}/app
 
 ## ----------- Install app requirements ------------
 # Install PycURL
-RUN	apt-get install -y libcurl4-gnutls-dev libgnutls28-dev python-pycurl python3-pycurl
+RUN	apt-get install -y libcurl4-gnutls-dev libgnutls28-dev python3-pycurl
 
 RUN  python3 -m pip install -r ${HOME}/app/requirements.txt
 

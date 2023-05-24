@@ -1,37 +1,44 @@
 {
-	"Samuel-redbarn": 
+	"swarm-node1": 
 	{
 		"name": "node1",
-		"enode": "enode://ddf6ef751f0ff655f7c9a4885dad19273adc739a21767980c3114624f9766cb216f8e1f610c1272a18515831d48a43035acc74bf2451b0dc15f21a8516f22062@128.226.88.250:30399",
-		"ip": "128.226.88.250",
-		"user": "samuel"
+		"enode": "enode://6ce4fd971cc4fa862722be7c1edfbf992b222f5ac1e0eab9db43cab3f7112f85bed0affc89c67d009cc291e26cf15bed4f911e55bd19a7de00e9eba31eb4ed87@127.0.0.1:30401",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
 	},
-	"hs-System-Product-Name": 
+	"swarm-node2": 
+	{
+		"name": "node2",
+		"enode": "enode://ec17829fb00ebefc3c2da4f94dde99d580fe1962776c6a0fd3b77b90b6463cc8c13763d4ede3df081b3ccfaefb2e6712a67daefd794416bf647eaabad793fa72@127.0.0.1:30402",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
+	},
+	"swarm-node3": 
 	{
 		"name": "node3",
-		"enode": "enode://5727e640baacfe3b1e7be8237feedd7514f9fe0160010a88a5309bc6007ea76f255c61a88ddc2a30b91cc72f3b0c62cb7089d43c9542e3095b88501765ae6fb3@128.226.79.79:30399",
-		"ip": "128.226.79.79",
-		"user": "samuel"
+		"enode": "enode://6e4e0a9a74a51ea5a2e702bad18070f40f33675a9ba292db059e5f3a4676bf1e5bc443f167d53c42c7aec38e137d9b6167def790ad811c6ec7dbc5c3d2dd3e25@127.0.0.1:30403",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
 	},
-	"samuel-OptiPlex-760": 
+	"swarm-node4": 
 	{
 		"name": "node4",
-		"enode": "enode://4d0e83fb921eaa08acc9426fc05c981d2bbceeaa877f33a89f3def7708a1d7b115cf04e5ecb048cef54dae5ad8a7347d2ae55bf6264a24641c7987aea34f1a22@128.226.77.51:30399",
-		"ip": "128.226.77.51",
-		"user": "samuel"
+		"enode": "enode://3222c28983386c8b34dd2174b9cc167b6d2523a3792975dc9aac1ce5cc0006ea70e5254c8d737b59d8fead13f50667ece94962aa34e399adc1ac14c60ac25cef@127.0.0.1:30404",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
 	},
-	"ussc2104-lab3": 
+	"swarm-node5": 
 	{
 		"name": "node5",
-		"enode": "enode://a7d288e69354646f4d81f75d58cb8525f7eae3ad9ef6f252a89cbac28bc300060c1ae4f2c1e6a699105d20e78d2172ed7ce9e321497e42c54a99adbb820c1ff4@128.226.78.46:30399",
-		"ip": "128.226.78.46",
-		"user": "samuel"
+		"enode": "enode://5695084c3c5bbf3a41d66137a23de35e7f945d0f37bd6d40c311d0a272aa4075cce99e622df6c126a813d8e244accbd248293e5332dfddb3e58e68d537bb3175@127.0.0.1:30405",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
 	},
-	"ussc2104-lab4": 
+	"swarm-node6": 
 	{
 		"name": "node6",
-		"enode": "enode://c75ec985d53d936d794ef3429abcbb773bd6f01d3a54ddbd38591897d08943ef151269837631b725644fb66cda04892b4eb422880d65f751736ed724f926e816@128.226.78.82:30399",
-		"ip": "128.226.78.82",
-		"user": "samuel"
+		"enode": "enode://8e7829a7b89006c52d3bb8ddba1cd071d32a37d2b2707a2c2b5296ff4ff2180ea4f8e1613f74bda4ed15d5e3d622dc0b720cd1f621792dd5a1c5cec7f7948ff9@127.0.0.1:30406",
+		"ip": "127.0.0.1",
+		"user": "rxu22"
 	}
 }

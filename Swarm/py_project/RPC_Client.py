@@ -20,14 +20,15 @@ from io import BytesIO
 from utilities import TypesUtil,FileUtil
 
 class RPC_Curl(object):
+	def __init__(self, bzz_port):
+		self.bzz_port = str(bzz_port)
 
 	'''
 	This can save a string data on swarm
 	Execute curl -X POST -H "Content-Type: text/plain" --data "some-data" http://localhost:8500/bzz:/
 	Return: Swarm hash of the address string of your content inside Swarm.
 	'''
-	@staticmethod
-	def upload_string(json_data): 
+	def upload_string(self, json_data): 
 		response = {}
 		# save data in byte_buffer with utf-8 format 
 		data = json_data['data']
@@ -40,7 +41,7 @@ class RPC_Curl(object):
 		crl.setopt(crl.HTTPHEADER, ['Content-Type: text/plain'])
 
 		# Set URL value
-		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/')
+		crl.setopt(crl.URL, 'http://localhost:'+self.bzz_port+'/bzz:/')
 
 		crl.setopt(crl.POST, 1)
 
@@ -70,15 +71,14 @@ class RPC_Curl(object):
 	To download a string content from Swarm, you just need the string’s Swarm hash. 
 	curl http://localhost:8500/bzz:/@hash/
 	'''
-	@staticmethod
-	def download_string(swarm_hash): 
+	def download_string(self, swarm_hash): 
 
 		response = {}
 		data_buffer = BytesIO() 
 		crl = pycurl.Curl()
 
 		# Set URL value
-		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/'+swarm_hash+'/')
+		crl.setopt(crl.URL, 'http://localhost:'+self.bzz_port+'/bzz:/'+swarm_hash+'/')
 
 		# Write bytes that are utf-8 encoded
 		crl.setopt(crl.WRITEDATA, data_buffer)
@@ -104,8 +104,7 @@ class RPC_Curl(object):
 	Execute curl -F "data=@path/to/local/file;type=text/plain" http://localhost:8500/bzz:/
 	Return: Swarm hash of the address string of root directory of your file inside Swarm.
 	'''
-	@staticmethod
-	def upload_file(file_name): 
+	def upload_file(self, file_name): 
 		response = {}
 		body_buffer = BytesIO(''.encode('utf-8')) 
 		crl = pycurl.Curl()
@@ -113,7 +112,7 @@ class RPC_Curl(object):
 		# crl.setopt(crl.HTTPHEADER, ['Content-Type: text/plain'])
 
 		# Set URL value
-		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/')
+		crl.setopt(crl.URL, 'http://localhost:'+self.bzz_port+'/bzz:/')
 
 		crl.setopt(crl.POST, 1)
 
@@ -143,15 +142,14 @@ class RPC_Curl(object):
 	To download a string content from Swarm, you just need the string’s Swarm hash. 
 	curl http://localhost:8500/bzz:/@hash/file
 	'''
-	@staticmethod
-	def download_file(swarm_hash, file_name, download_file='download_data'): 
+	def download_file(self, swarm_hash, file_name, download_file='download_data'): 
 		response = {}
 		# data_buffer used to save response information
 		data_buffer = BytesIO() 
 		crl = pycurl.Curl()
 
 		# Set URL value
-		crl.setopt(crl.URL, 'http://localhost:8500/bzz:/'+swarm_hash+'/'+file_name)
+		crl.setopt(crl.URL, 'http://localhost:'+self.bzz_port+'/bzz:/'+swarm_hash+'/'+file_name)
 
 		# Write bytes that are utf-8 encoded
 		crl.setopt(crl.WRITEDATA, data_buffer)

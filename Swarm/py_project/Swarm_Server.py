@@ -23,7 +23,6 @@ from RPC_Client import RPC_Curl
 
 logger = logging.getLogger(__name__)
 
-
 # ================================= Instantiate the server =====================================
 app = Flask(__name__)
 #CORS(app)
@@ -41,7 +40,7 @@ def download_data():
 
 	# -------------- call curl API to query data ------------------
 	swarm_hash = tx_json['hash']
-	query_ret = RPC_Curl.download_string(swarm_hash)
+	query_ret = rpc_curl.download_string(swarm_hash)
 
 	response = {}
 	# build response given get result
@@ -63,7 +62,7 @@ def upload_data():
 		abort(401, {'error': 'No parameter data'})
 
 	# -------------- call curl API to send data ------------------
-	post_ret = RPC_Curl.upload_string(tx_json)
+	post_ret = rpc_curl.upload_string(tx_json)
 	
 	response = {}
 	# build response given post result
@@ -88,7 +87,7 @@ def download_file():
 	swarm_hash = tx_json['hash']
 	file_name = tx_json['file_name']
 	download_file = tx_json['download_file']
-	query_ret = RPC_Curl.download_file(swarm_hash, file_name, download_file)
+	query_ret = rpc_curl.download_file(swarm_hash, file_name, download_file)
 
 	response = {}
 	# build response given query result
@@ -113,7 +112,7 @@ def upload_file():
 	uploaded_file.save(file_name)
 
 	# # -------------- call curl API to upload file to swarm net ------------------
-	post_ret = RPC_Curl.upload_file(file_name)
+	post_ret = rpc_curl.upload_file(file_name)
 
 	# remove local uploaded file
 	os.remove(file_name)
@@ -129,8 +128,10 @@ def upload_file():
 
 def define_and_get_arguments(args=sys.argv[1:]):
 	parser = ArgumentParser(description="Run swarm_server websocket server.")
-	parser.add_argument('-p', '--port', default=8501, type=int, 
+	parser.add_argument('-p', '--port', default=8580, type=int, 
 						help="port to listen on.")
+	parser.add_argument('-bp', '--bzz_port', default=8500, type=int, 
+						help="bzz port to listen on.")
 	parser.add_argument("--debug", action="store_true", 
 						help="if set, debug model will be used.")
 	parser.add_argument("--threaded", action="store_true", 
@@ -147,6 +148,8 @@ if __name__ == '__main__':
 
 	# get arguments
 	args = define_and_get_arguments()
+
+	rpc_curl = RPC_Curl(args.bzz_port)
 
 	app.run(host='0.0.0.0', port=args.port, debug=args.debug, threaded=args.threaded)
 

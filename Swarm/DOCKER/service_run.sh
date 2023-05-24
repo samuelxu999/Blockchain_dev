@@ -45,7 +45,7 @@ if  [ "start" == "$OPERATION" ]; then
 	./run_bash.sh $CONTAINER_NAME
 
 	## run Swarm service app
-	app_cmd="python3 Swarm_Server.py --threaded --port $PORT"
+	app_cmd="python3 Swarm_Server.py --threaded --port $PORT --bzz_port $BZZ_PORT"
 	./docker_exec.sh $CONTAINER_NAME docker "$app_cmd" &>/dev/null &
 
 	## run swarm node 
