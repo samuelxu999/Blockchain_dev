@@ -70,6 +70,10 @@ Execute './service_run.sh show --container_name' can list all running container.
 
 Run './swarm_nodes.sh' to learn usage. This script can be used to manage swarm_node containers deployed on host machines.
 
+## cluster_exec.sh
+
+Run './cluster_exec.sh' to learn usage. This script can be used to start, show and stop 6 swarm nodes (containers) on the server. They can be used as a test demo swarm network.
+
 ## requirements.txt
 
 this is used to install python packages in Dockerfile.
