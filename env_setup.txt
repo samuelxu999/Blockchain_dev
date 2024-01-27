@@ -21,9 +21,9 @@ B) Install Go language:
 		wget https://storage.googleapis.com/golang/go1.9.3.linux-armv6l.tar.gz
 		sudo tar -C /usr/local -xzf go1.9.3.linux-armv6l.tar.gz
 	
-	--- For Ubuntu 16.04
-		wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz
-		sudo tar -C /usr/local -xzf go1.9.3.linux-amd64.tar.gz
+	--- For Ubuntu 22.04
+		wget https://storage.googleapis.com/golang/go1.18.2.linux-amd64.tar.gz
+		sudo tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
 	
 	Add GOROOT and GOPATH env variables and append them to PATH
 	GOROOT: go_lang library and tools 
@@ -73,7 +73,7 @@ Method 2): Build from source code
 	C) Ether go-ethereum
 		cd go-ethereum
 	# We use v1.7.3 for our project, so check out version based on tag
-		git checkout v1.7.3
+		git checkout v1.10.19
 
 	D) build geth. This will take several minutes to be done.
 		make geth
