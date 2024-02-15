@@ -8,13 +8,15 @@ A) Install Docker Engine And Docker Compose
 	brew install docker docker-compose
 			
 
-B) Install Go language:
-	Not suggest use: `sudo apt-get install golang` to install golang
-	All golang package can be found on https://golang.org/dl/
+B) Install Go language:	
+	First of all, download go package, like go1.22.0.darwin-amd64.pkg
+		wget https://storage.googleapis.com/golang/go1.22.0.darwin-arm64.tar.gz
+
+	Remove old version of go:
+		rm -rf /usr/local/go
 	
-	First of all, download go package, like go1.18.4.darwin-arm64.pkg
-	
-	Then follows the go install instruction: https://go.dev/doc/install
+	Finally extract file to /usr/local/go
+		sudo tar -C /usr/local -xzf go1.22.0.darwin-arm64.tar.gz
 
 	
 C)  Add GOROOT and GOPATH env variables and append them to PATH
@@ -56,7 +58,7 @@ Method: build from source code
 		git checkout v1.10.19
 
 	D) build geth. This will take several minutes to be done.
-		make geth
+		make all
 
 	E) Add go-ethereum executable bin path in ~/.zshrc
 		1) open ~/.zshrc file
