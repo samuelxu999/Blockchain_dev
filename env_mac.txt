@@ -18,10 +18,13 @@ B) Install Go language:
 	Finally extract file to /usr/local/go
 		sudo tar -C /usr/local -xzf go1.22.0.darwin-arm64.tar.gz
 
+	Unlink Currently Installed Go Version
+		brew unlink go
+
 	
 C)  Add GOROOT and GOPATH env variables and append them to PATH
 	GOROOT: go_lang library and tools 
-	GOGOPATH: go application work directory, e.g., $HOME/MyDocuments/05_Developer/dev_pkg
+	GOPATH: go application work directory, e.g., $HOME/MyDocuments/05_Developer/dev_pkg
 	1) open ~/.zshrc file
 		pico ~/.zshrc
 
@@ -57,7 +60,7 @@ Method: build from source code
 	C) You may use specify version, like v1.10.19, so check out version based on tag
 		git checkout v1.10.19
 
-	D) build geth. This will take several minutes to be done.
+	D) build all inclduing geth and bootnode. This will take several minutes to be done.
 		make all
 
 	E) Add go-ethereum executable bin path in ~/.zshrc
